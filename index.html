@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title data-i18n="meta.title">Medfer — Medizinischer Patiententransport, Frankfurt</title>
+<meta name="description" data-i18n-attr="content" data-i18n="meta.desc" content="Medfer: spezialisierter Sitzendtransport für Patienten in Frankfurt — Serienfahrten zu Dialyse & Chemotherapie, Einzelfahrten zu Arztterminen, Laborfahrten. Direkte Abrechnung mit der Krankenkasse.">
+<meta property="og:title" data-i18n-attr="content" data-i18n="meta.title" content="Medfer — Medizinischer Patiententransport, Frankfurt">
+<meta property="og:description" data-i18n-attr="content" data-i18n="meta.ogdesc" content="Sitzendfahrten zu Dialyse, Chemotherapie und Arztterminen sowie Expressfahrten für Labore — persönlich gefahren, pünktlich und diskret.">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://medfer.de/">
+<meta property="og:url" content="https://medfer.de/">
+<meta property="og:image" content="https://medfer.de/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<style>
+  :root {
+    box-sizing: border-box;
+    --ink: #10171C; --ink-soft: #566069; --line: #E1E7E6;
+    --paper: #FFFFFF; --panel: #F3F7F6;
+    --teal: #0E6E6B; --teal-deep: #0A4F4D; --teal-pale: #E3F3F1;
+    padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  html { scroll-behavior: smooth; scroll-padding-top: 110px; }
+  *, *::before, *::after { box-sizing: inherit; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; line-height: 1.55; }
+  h1, h2 { margin: 0; font-weight: 800; letter-spacing: -0.02em; }
+  p { margin: 0; }
+  a { color: inherit; }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+  input, select, button { font-family: inherit; font-size: 1rem; }
+
+  header { position: sticky; top: 0; z-index: 10; background: rgba(255,255,255,0.94); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); padding-top: env(safe-area-inset-top, 0px); }
+  .nav { max-width: 880px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+  .brand { display: flex; align-items: center; gap: 10px; flex: none; }
+  .mark { width: 34px; height: 34px; border-radius: 9px; background: var(--teal); display: flex; align-items: center; justify-content: center; flex: none; }
+  .mark svg { width: 17px; height: 17px; }
+  .wordmark { font-weight: 800; font-size: 1.3rem; letter-spacing: -0.02em; line-height: 1.1; }
+  .wordmark .fer { color: var(--teal); }
+  .wordmark small { display: block; font-size: 0.56rem; font-weight: 600; letter-spacing: 0.13em; color: var(--ink-soft); text-transform: uppercase; }
+  .navright { display: flex; align-items: center; gap: 8px; flex: none; }
+  .lang-toggle { background: none; border: 1px solid var(--line); color: var(--ink-soft); font-weight: 700; font-size: 0.78rem; padding: 7px 11px; border-radius: 100px; cursor: pointer; }
+  .call { background: var(--ink); color: #fff; text-decoration: none; font-weight: 600; font-size: 0.86rem; padding: 10px 18px; border-radius: 100px; flex: none; }
+  .tabs { display: flex; gap: 6px; overflow-x: auto; padding: 0 24px 12px; max-width: 880px; margin: 0 auto; scrollbar-width: none; }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab { flex: none; background: none; border: none; cursor: pointer; font-size: 0.86rem; font-weight: 600; color: var(--ink-soft); border-radius: 100px; padding: 7px 14px; white-space: nowrap; }
+  .tab.active { background: var(--teal-pale); color: var(--teal-deep); }
+
+  .page { display: none; }
+  .page.active { display: block; }
+
+  section { padding: 44px 0; }
+  .eyebrow { text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.08em; color: var(--ink-soft); font-weight: 700; margin-bottom: 6px; }
+  .section-title { font-size: 1.4rem; font-weight: 800; margin-bottom: 12px; }
+  .section-sub { color: var(--ink-soft); font-size: 0.98rem; max-width: 56ch; margin-bottom: 20px; }
+
+  .hero { padding: 44px 0 100px; position: relative; overflow: hidden; }
+  .hero::before { content:""; position:absolute; top:-140px; right:-160px; width:420px; height:420px; border-radius:50%; background: radial-gradient(circle, var(--teal-pale) 0%, rgba(255,255,255,0) 70%); z-index: 0; }
+  .hero-skyline { position: absolute; left: 0; right: 0; bottom: 0; height: 86px; overflow: hidden; z-index: 0; opacity: 0.9; }
+  .hero-skyline svg { width: 100%; height: 140px; display: block; position: absolute; bottom: -54px; }
+  @media (max-width: 820px) { .hero { padding-bottom: 70px; } .hero-skyline { height: 56px; } .hero-skyline svg { height: 100px; bottom: -44px; } }
+  .hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; align-items: center; gap: 30px; position: relative; z-index: 1; }
+  .hero h1 { font-size: clamp(1.6rem, 5.4vw, 2.7rem); max-width: 17ch; }
+  .accent-bar { width: 48px; height: 4px; border-radius: 2px; background: var(--teal); margin: 0 0 16px; }
+  .hero p.lede { margin-top: 16px; max-width: 42ch; color: var(--ink-soft); font-size: 1.04rem; }
+  .hero-cta { margin-top: 26px; display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-dark-lg { background: var(--ink); color: #fff; text-decoration: none; font-weight: 700; padding: 15px 28px; border-radius: 10px; }
+  .btn-line-lg { border: 1px solid var(--line); text-decoration: none; font-weight: 700; padding: 15px 28px; border-radius: 10px; color: var(--ink); }
+  .badges { margin-top: 24px; display: flex; gap: 14px 20px; flex-wrap: wrap; }
+  .badges span { font-size: 0.82rem; color: var(--ink-soft); font-weight: 600; display: flex; align-items: center; gap: 6px; }
+  .badges svg { width: 15px; height: 15px; color: var(--teal); flex: none; }
+  .car-wrap { text-align: center; }
+
+  .about { max-width: 62ch; color: var(--ink-soft); font-size: 1.02rem; }
+  .driver { display: flex; gap: 18px; align-items: center; border: 1px solid var(--line); border-radius: 16px; padding: 22px; max-width: 62ch; }
+  .driver-avatar { width: 56px; height: 56px; border-radius: 50%; background: var(--teal); display: flex; align-items: center; justify-content: center; flex: none; }
+  .driver-avatar svg { width: 30px; height: 30px; }
+  .driver h3 { font-size: 1.05rem; font-weight: 800; margin: 2px 0 6px; }
+  .driver p { color: var(--ink-soft); font-size: 0.92rem; }
+
+  .services { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .svc { border: 1px solid var(--line); border-radius: 14px; padding: 20px 16px; }
+  .svc .ic { width: 44px; height: 44px; border-radius: 11px; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; background: var(--teal-pale); }
+  .svc svg { width: 22px; height: 22px; color: var(--teal-deep); }
+  .svc h3 { font-size: 0.98rem; font-weight: 700; }
+  .svc p { font-size: 0.86rem; color: var(--ink-soft); margin-top: 4px; }
+
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .step-card { border: 1px solid var(--line); border-radius: 14px; padding: 20px; }
+  .step-num { width: 28px; height: 28px; border-radius: 50%; background: var(--teal); color: #fff; font-weight: 800; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
+  .step-card h3 { font-size: 0.96rem; font-weight: 700; }
+  .step-card p { font-size: 0.86rem; color: var(--ink-soft); margin-top: 6px; }
+
+  .svc-detail { border: 1px solid var(--line); border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+  .svc-detail h3 { font-size: 1.1rem; font-weight: 800; color: var(--ink); }
+  .svc-detail .tag { display: inline-block; font-size: 0.72rem; font-weight: 700; color: var(--teal-deep); background: var(--teal-pale); border-radius: 100px; padding: 3px 10px; margin-bottom: 10px; }
+  .svc-detail p { color: var(--ink-soft); font-size: 0.95rem; margin-top: 8px; }
+
+  .notice { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; font-size: 0.92rem; color: var(--ink-soft); }
+  .notice strong { color: var(--ink); }
+
+  .faq details { border-bottom: 1px solid var(--line); padding: 16px 0; }
+  .faq summary { cursor: pointer; font-weight: 700; font-size: 1rem; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: "+"; font-size: 1.3rem; color: var(--ink-soft); font-weight: 400; }
+  .faq details[open] summary::after { content: "–"; }
+  .faq p { margin-top: 10px; color: var(--ink-soft); font-size: 0.94rem; max-width: 62ch; }
+
+  .contact { background: var(--ink); color: #fff; border-radius: 18px; padding: 36px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; }
+  .contact h2 { color: #fff; font-size: 1.4rem; }
+  .contact p { color: #B9C0C9; margin-top: 6px; }
+  .contact-links { display: flex; gap: 10px; flex-wrap: wrap; }
+  .contact-links a { text-decoration: none; color: #fff; font-weight: 600; font-size: 0.92rem; border: 1px solid rgba(255,255,255,0.28); border-radius: 100px; padding: 12px 20px; }
+  .contact-links a.primary { background: var(--teal); color: #fff; border-color: var(--teal); }
+
+  .booking-form { border: 1px solid var(--line); border-radius: 18px; padding: 28px; background: var(--panel); }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 18px; }
+  .field { display: grid; gap: 5px; }
+  .field.full { grid-column: 1 / -1; }
+  .field label { font-size: 0.84rem; color: var(--ink-soft); font-weight: 600; }
+  .field input, .field select { border: 1px solid var(--line); border-radius: 9px; padding: 11px 12px; background: #fff; }
+  .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+  .btn-dark { background: var(--ink); color: #fff; border: none; border-radius: 9px; padding: 13px 22px; font-weight: 700; cursor: pointer; }
+  .btn-outline { background: #fff; color: var(--ink); border: 1px solid var(--ink); border-radius: 9px; padding: 13px 22px; font-weight: 700; cursor: pointer; }
+  .fnote { margin-top: 12px; font-size: 0.8rem; color: var(--ink-soft); }
+  .consent { display: flex; gap: 10px; align-items: flex-start; margin-top: 18px; font-size: 0.86rem; color: var(--ink-soft); cursor: pointer; }
+  .consent input { margin-top: 3px; flex: none; }
+  .consent a { color: var(--teal-deep); font-weight: 600; }
+
+  footer { padding: 24px 0 40px; }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; color: var(--ink-soft); font-size: 0.82rem; }
+  footer a { color: var(--ink-soft); text-decoration: underline; }
+  .legal p { margin-bottom: 16px; color: var(--ink-soft); font-size: 0.94rem; max-width: 62ch; }
+  .legal strong { color: var(--ink); display: block; margin-bottom: 4px; font-size: 0.98rem; }
+
+  @media (min-width: 821px) and (max-width: 1000px) {
+    .services, .steps { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 820px) {
+    .hero-grid, .services, .steps { grid-template-columns: 1fr; }
+    .car-wrap svg { width: 220px; }
+    .grid2 { grid-template-columns: 1fr; }
+    .contact { flex-direction: column; align-items: flex-start; }
+    .driver { flex-direction: column; align-items: flex-start; text-align: left; }
+  }
+  @media (max-width: 360px) {
+    .hero h1 { font-size: 1.5rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="brand">
+      <div class="mark">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="navMarkBg" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#16A39E"/>
+              <stop offset="0.55" stop-color="#0E6E6B"/>
+              <stop offset="1" stop-color="#083E3D"/>
+            </linearGradient>
+            <radialGradient id="navMarkGloss" cx="0.3" cy="0.24" r="0.8">
+              <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.32"/>
+              <stop offset="0.55" stop-color="#FFFFFF" stop-opacity="0.05"/>
+              <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <rect width="100" height="100" rx="24" fill="url(#navMarkBg)"/>
+          <rect width="100" height="100" rx="24" fill="url(#navMarkGloss)"/>
+          <rect x="11" y="11" width="78" height="78" rx="17" fill="none" stroke="#fff" stroke-width="1.3" opacity="0.25"/>
+          <path d="M50 30v40M30 50h40" stroke="#fff" stroke-width="11" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="wordmark">med<span class="fer">fer</span><small>Medical Transfer</small></div>
+    </div>
+    <div class="navright">
+      <button class="lang-toggle" id="langToggle" onclick="toggleLang()">EN</button>
+      <a class="call" href="tel:+49017648989575" data-i18n="nav.call">Anrufen</a>
+    </div>
+  </div>
+  <nav class="tabs">
+    <button class="tab active" data-target="start" onclick="showPage('start')" data-i18n="nav.start">Startseite</button>
+    <button class="tab" data-target="leistungen" onclick="showPage('leistungen')" data-i18n="nav.services">Leistungen</button>
+    <button class="tab" data-target="ratgeber" onclick="showPage('ratgeber')" data-i18n="nav.guide">Ratgeber & FAQ</button>
+  </nav>
+</header>
+
+<!-- STARTSEITE -->
+<main class="page active" data-page="start">
+
+  <section class="hero">
+    <div class="hero-skyline" aria-hidden="true">
+      <svg viewBox="0 0 1200 440" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="bldFar2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9FC9C6"/><stop offset="1" stop-color="#7FB3AF"/></linearGradient>
+          <linearGradient id="bldNear2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#16A39E"/><stop offset="1" stop-color="#0A4F4D"/></linearGradient>
+          <linearGradient id="river2" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#B6DEDB"/><stop offset="0.5" stop-color="#D6EEEC"/><stop offset="1" stop-color="#B6DEDB"/></linearGradient>
+        </defs>
+        <g fill="url(#bldFar2)" opacity="0.6">
+          <rect x="20" y="260" width="56" height="110"/><rect x="86" y="230" width="44" height="140"/><rect x="140" y="275" width="50" height="95"/>
+          <rect x="860" y="250" width="50" height="120"/><rect x="920" y="220" width="40" height="150"/><rect x="970" y="265" width="58" height="105"/><rect x="1040" y="240" width="46" height="130"/><rect x="1096" y="270" width="60" height="100"/>
+        </g>
+        <g fill="url(#bldNear2)" opacity="0.85">
+          <rect x="60" y="230" width="70" height="150"/><rect x="152" y="188" width="52" height="192"/><rect x="222" y="252" width="58" height="128"/>
+          <rect x="298" y="140" width="48" height="240"/><rect x="298" y="124" width="48" height="20" rx="4"/>
+          <rect x="364" y="200" width="64" height="180"/><rect x="446" y="168" width="40" height="212"/><rect x="504" y="222" width="80" height="158"/>
+          <rect x="602" y="108" width="52" height="272"/><circle cx="628" cy="96" r="10"/>
+          <rect x="672" y="248" width="58" height="132"/><rect x="748" y="182" width="48" height="198"/><rect x="814" y="226" width="74" height="154"/>
+        </g>
+        <path d="M0 376 C150 352 250 400 400 376 C560 350 650 396 800 374 C950 352 1050 394 1200 372 L1200 440 L0 440 Z" fill="url(#river2)" opacity="0.8"/>
+        <rect x="0" y="406" width="1200" height="34" fill="#073937" opacity="0.85"/>
+        <path d="M0 423H1200" stroke="#E3F3F1" stroke-width="3" stroke-dasharray="22 16" opacity="0.5"/>
+      </svg>
+    </div>
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow" data-i18n="hero.eyebrow">Medizinischer Patiententransport · Frankfurt</p>
+        <div class="accent-bar"></div>
+        <h1 data-i18n="hero.h1">Fahrten, auf die Verlass ist.</h1>
+        <p class="lede" data-i18n="hero.lede">Sitzendfahrten zu Dialyse, Chemotherapie und Arztterminen sowie Expressfahrten für Labore — persönlich gefahren, pünktlich und diskret.</p>
+        <div class="hero-cta">
+          <a class="btn-dark-lg" href="#buchen" data-i18n="hero.cta1">Fahrt anfragen</a>
+          <a class="btn-line-lg" href="tel:+49017648989575">017648989575</a>
+        </div>
+        <div class="badges">
+          <span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="hero.badge1">Lizenzierter Taxibetrieb</span></span>
+          <span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="hero.badge2">Ein fester Fahrer, kein Wechsel</span></span>
+          <span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="hero.badge3">Diskret & pünktlich</span></span>
+        </div>
+      </div>
+      <div class="car-wrap">
+        <svg width="300" height="190" viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Fahrzeug-Illustration">
+          <defs>
+            <linearGradient id="body" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FDFEFE"/><stop offset="0.32" stop-color="#E4EDEC"/><stop offset="0.55" stop-color="#FAFBFB"/><stop offset="0.8" stop-color="#C3D4D2"/><stop offset="1" stop-color="#8FA6A3"/></linearGradient>
+            <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#CFEAE6"/><stop offset="1" stop-color="#6FB8AD"/></linearGradient>
+            <radialGradient id="wheel" cx="0.35" cy="0.3" r="0.75"><stop offset="0" stop-color="#FFFFFF"/><stop offset="0.35" stop-color="#DDE3E8"/><stop offset="0.7" stop-color="#9AA6B0"/><stop offset="1" stop-color="#5E6871"/></radialGradient>
+            <linearGradient id="shine" x1="0" y1="0" x2="1" y2="0.3"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0"/><stop offset="0.5" stop-color="#FFFFFF" stop-opacity="0.9"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></linearGradient>
+          </defs>
+          <ellipse cx="160" cy="172" rx="138" ry="10" fill="#0A0A0A" opacity="0.08"/>
+          <path d="M12 148 Q12 134 26 131 L44 127 Q52 108 72 95 Q92 82 120 81 L168 81 Q198 81 218 100 L240 122 L272 128 Q308 133 308 152 Q308 148 300 148 Z" fill="url(#body)" stroke="#6B7681" stroke-width="2.4" stroke-linejoin="round"/>
+          <path d="M72 95c14-10 30-15 48-15h48c22 0 42 9 56 25l16 17" fill="none" stroke="#6B7681" stroke-width="2.4" stroke-linecap="round"/>
+          <path d="M30 108c50-16 190-16 260 10" stroke="url(#shine)" stroke-width="7" fill="none"/>
+          <path d="M96 108l16-19c5-6 12.4-9.5 20-9.5h18v28.5H96Z" fill="url(#glass)" stroke="#6B7681" stroke-width="1.6"/>
+          <path d="M154 79.5h22c14 0 27 6.4 35.7 17.4l9.3 11.1h-67V79.5Z" fill="url(#glass)" stroke="#6B7681" stroke-width="1.6"/>
+          <line x1="154" y1="108" x2="154" y2="79.5" stroke="#6B7681" stroke-width="1.4"/>
+          <path d="M154 108v40" stroke="#6B7681" stroke-width="1.2" opacity="0.5"/>
+          <path d="M232 122v26" stroke="#6B7681" stroke-width="1.2" opacity="0.5"/>
+          <rect x="172" y="122" width="14" height="4" rx="2" fill="#6B7681" opacity="0.75"/>
+          <rect x="248" y="132" width="14" height="4" rx="2" fill="#6B7681" opacity="0.75"/>
+          <path d="M92 104c-6-1-10 1.5-11 6.5" stroke="#6B7681" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+          <rect x="140" y="58" width="40" height="18" rx="4" fill="#fff" stroke="#6B7681" stroke-width="1.8"/>
+          <rect x="145" y="63" width="30" height="8" rx="2" fill="var(--teal)"/>
+          <circle cx="120" cy="128" r="11" fill="#fff" stroke="var(--teal)" stroke-width="1.8"/>
+          <path d="M120 122.5v11M114.5 128h11" stroke="var(--teal)" stroke-width="2" stroke-linecap="round"/>
+          <ellipse cx="44" cy="118" rx="5" ry="4" fill="#fff" stroke="#6B7681" stroke-width="1.2"/>
+          <rect x="292" y="123" width="8" height="10" rx="2" fill="var(--teal)" opacity="0.8"/>
+          <path d="M12 148h296" stroke="#6B7681" stroke-width="1.8"/>
+          <rect x="34" y="124" width="18" height="10" rx="2.5" fill="#fff" stroke="#6B7681" stroke-width="1.2"/>
+          <rect x="266" y="124" width="18" height="10" rx="2.5" fill="#fff" stroke="#6B7681" stroke-width="1.2"/>
+          <circle cx="88" cy="172" r="26" fill="url(#wheel)" stroke="#4F5A63" stroke-width="1.8"/><circle cx="88" cy="172" r="10" fill="#4F5A63"/><circle cx="88" cy="172" r="3.2" fill="#fff"/>
+          <circle cx="252" cy="172" r="26" fill="url(#wheel)" stroke="#4F5A63" stroke-width="1.8"/><circle cx="252" cy="172" r="10" fill="#4F5A63"/><circle cx="252" cy="172" r="3.2" fill="#fff"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <p class="eyebrow" data-i18n="about.eyebrow">Über uns</p>
+      <p class="about" data-i18n="about.p">Medfer ist ein spezialisierter Sitzendtransport für Patienten in Frankfurt und Umgebung. Ein fester Fahrer, ein Fahrzeug, ein direkter Draht — statt wechselnder Fahrer über eine Vermittlungs-App. So bleibt jede Fahrt persönlich, pünktlich und nachvollziehbar.</p>
+    </div>
+  </section>
+
+  <section style="padding-top:0;">
+    <div class="wrap">
+      <div class="driver">
+        <div class="driver-avatar"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.6" stroke="#fff" stroke-width="1.8"/><path d="M4.5 20c1.2-4.4 4.4-6.8 7.5-6.8s6.3 2.4 7.5 6.8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <div>
+          <p class="eyebrow" data-i18n="driver.eyebrow">Ihr Fahrer</p>
+          <h3 data-i18n="driver.h3">Immer derselbe, persönlich</h3>
+          <p data-i18n="driver.p">Fährt jede Fahrt persönlich — kein Wechsel, kein Callcenter. Wer bei Medfer anruft, spricht direkt mit dem Fahrer, der auch abholt.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0;">
+    <div class="wrap">
+      <p class="eyebrow" data-i18n="services.eyebrow">Kernleistungen</p>
+      <div class="services">
+        <div class="svc"><div class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3v6M12 15v6M4.2 7.8l4.2 4.2M15.6 12l4.2 4.2M4.2 16.2l4.2-4.2M15.6 12l4.2-4.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="12" r="2.4" fill="currentColor"/></svg></div><h3 data-i18n="svc1.h3">Serienfahrten</h3><p data-i18n="svc1.p">Dialyse & Chemotherapie, fester Plan</p></div>
+        <div class="svc"><div class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 1 0 9 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M12 3v9l6 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3 data-i18n="svc2.h3">Einzelfahrten</h3><p data-i18n="svc2.p">Arzt- & Krankenhaustermine</p></div>
+        <div class="svc"><div class="ic"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="7" width="12" height="9" rx="1.5" stroke="currentColor" stroke-width="1.6"/><path d="M15 10h3l3 3v3h-6v-6Z" stroke="currentColor" stroke-width="1.6"/><circle cx="7.5" cy="17.5" r="1.6" fill="currentColor"/><circle cx="17.5" cy="17.5" r="1.6" fill="currentColor"/></svg></div><h3 data-i18n="svc3.h3">Laborfahrten</h3><p data-i18n="svc3.p">Expressfahrten für Labore</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0;">
+    <div class="wrap">
+      <p class="eyebrow" data-i18n="cost.eyebrow">Kostenübernahme</p>
+      <h2 class="section-title" data-i18n="cost.h2">Wir rechnen direkt mit Ihrer Krankenkasse ab</h2>
+      <p class="section-sub" data-i18n="cost.sub">Mit dem Transportschein (Muster 4) Ihres Arztes übernehmen wir die Abrechnung — Sie müssen sich um nichts weiter kümmern.</p>
+      <div class="steps">
+        <div class="step-card"><div class="step-num">1</div><h3 data-i18n="step1.h3">Verordnung vom Arzt</h3><p data-i18n="step1.p">Ihr Arzt stellt den Transportschein (Muster 4) aus.</p></div>
+        <div class="step-card"><div class="step-num">2</div><h3 data-i18n="step2.h3">Fahrt vereinbaren</h3><p data-i18n="step2.p">Sie oder die Klinik melden sich bei uns, wir planen die Fahrt.</p></div>
+        <div class="step-card"><div class="step-num">3</div><h3 data-i18n="step3.h3">Direkte Abrechnung</h3><p data-i18n="step3.p">Wir rechnen die Fahrt direkt mit Ihrer Krankenkasse ab.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="buchen">
+    <div class="wrap">
+      <p class="eyebrow" data-i18n="booking.eyebrow">Fahrt buchen</p>
+      <div class="booking-form">
+        <form id="bookingForm">
+          <div class="grid2">
+            <div class="field"><label for="f-name" data-i18n="field.name">Name *</label><input id="f-name" name="name" required></div>
+            <div class="field"><label for="f-phone" data-i18n="field.phone">Telefon *</label><input id="f-phone" name="phone" type="tel" required></div>
+            <div class="field"><label for="f-pickup" data-i18n="field.pickup">Abholadresse *</label><input id="f-pickup" name="pickup" required></div>
+            <div class="field"><label for="f-dropoff" data-i18n="field.dropoff">Zieladresse *</label><input id="f-dropoff" name="dropoff" required></div>
+            <div class="field"><label for="f-date" data-i18n="field.date">Datum *</label><input id="f-date" name="date" type="date" required></div>
+            <div class="field"><label for="f-time" data-i18n="field.time">Uhrzeit *</label><input id="f-time" name="time" type="time" required></div>
+            <div class="field full"><label for="f-kind" data-i18n="field.kind">Art der Fahrt *</label>
+              <select id="f-kind" name="kind" required>
+                <option value="" data-i18n="opt.placeholder">Bitte wählen</option>
+                <option data-i18n="opt.1">Serienfahrt (Dialyse)</option>
+                <option data-i18n="opt.2">Serienfahrt (Chemotherapie)</option>
+                <option data-i18n="opt.3">Einzelfahrt (Arzttermin)</option>
+                <option data-i18n="opt.4">Entlassung / Verlegung (Klinik)</option>
+                <option data-i18n="opt.5">Laborfahrt (Express)</option>
+                <option data-i18n="opt.6">Sonstige Sitzendfahrt</option>
+              </select>
+            </div>
+            <div class="field full"><label for="f-note" data-i18n="field.note">Anmerkungen</label><input id="f-note" name="note" placeholder="optional" data-i18n-attr="placeholder" data-i18n="field.noteph"></div>
+          </div>
+          <label class="consent">
+            <input type="checkbox" name="consent" required>
+            <span data-i18n-html="consent.html">Ich bin einverstanden, dass meine Angaben — auch zur Art der Behandlung — zur Bearbeitung dieser Anfrage verwendet werden. Details in der <a href="#" onclick="event.preventDefault(); showPage('datenschutz');">Datenschutzerklärung</a>.</span>
+          </label>
+          <div class="actions">
+            <button type="submit" class="btn-dark" data-mode="mail" data-i18n="booking.mail">Per E-Mail buchen</button>
+            <button type="submit" class="btn-outline" data-mode="whatsapp" data-i18n="booking.whatsapp">Per WhatsApp</button>
+          </div>
+          <p class="fnote" data-i18n="booking.fnote">Anfrage, keine automatische Bestätigung — Rückmeldung folgt per Telefon, E-Mail oder WhatsApp. Aktuell ausschließlich Sitzendfahrten.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section id="kontakt">
+    <div class="wrap">
+      <div class="contact">
+        <div><h2 data-i18n="contact.h2">Direkt erreichbar</h2><p data-i18n="contact.p">Meist erreichen Sie uns sofort.</p></div>
+        <div class="contact-links">
+          <a class="primary" href="tel:+49017648989575">☎ 017648989575</a>
+          <a href="mailto:service@medfer.de" data-i18n="contact.email">✉ E-Mail</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- LEISTUNGEN -->
+<main class="page" data-page="leistungen">
+  <section>
+    <div class="wrap">
+      <p class="eyebrow" data-i18n="nav.services">Leistungen</p>
+      <h2 class="section-title" data-i18n="svcpage.h2">Jede Fahrtart im Detail</h2>
+
+      <div class="svc-detail">
+        <span class="tag" data-i18n="svcpage.tag1">Wiederkehrend</span>
+        <h3 data-i18n="svc1.h3">Serienfahrten</h3>
+        <p data-i18n="svcpage.p1">Für Dialyse, Chemotherapie und andere regelmäßige Behandlungen zählt jede Minute. Serienfahrten laufen nach einem festen Plan — derselbe Fahrer, dieselbe Abholzeit, Woche für Woche. So verpassen Sie keinen Termin und müssen sich nicht jedes Mal neu organisieren.</p>
+      </div>
+
+      <div class="svc-detail">
+        <span class="tag" data-i18n="svcpage.tag2">Einmalig</span>
+        <h3 data-i18n="svc2.h3">Einzelfahrten</h3>
+        <p data-i18n="svcpage.p2">Für einzelne Arzt- oder Krankenhaustermine — flexibel buchbar, auch kurzfristig nach Verfügbarkeit. Ideal als Ergänzung zu Serienfahrten oder für spontane Behandlungstermine.</p>
+      </div>
+
+      <div class="svc-detail">
+        <span class="tag" data-i18n="svcpage.tag3">Kliniken</span>
+        <h3 data-i18n="svcpage.h3-discharge">Entlassung & Verlegung</h3>
+        <p data-i18n="svcpage.p3">Ein fester Ansprechpartner statt wechselnder Fahrer über eine Vermittlungs-App. Kurzfristige Termine für Entlassungen oder Verlegungen nach Verfügbarkeit, mit direkter telefonischer Rückmeldung.</p>
+      </div>
+
+      <div class="svc-detail">
+        <span class="tag" data-i18n="svcpage.tag4">Labore</span>
+        <h3 data-i18n="svcpage.h3-lab">Laborfahrten (Express)</h3>
+        <p data-i18n="svcpage.p4">Schneller Transport von Proben und Unterlagen zwischen Arztpraxen, Laboren und Kliniken. Feste Zeitfenster auf Wunsch, kurzfristige Abholung nach Absprache.</p>
+      </div>
+
+      <div class="notice" style="margin-bottom:16px;" data-i18n-html="notice.labs"><strong>Für Labore & Arztpraxen:</strong> Für wiederkehrende Probentransporte lässt sich eine feste Abholzeit einrichten — mit einem direkten Ansprechpartner statt wechselnder Fahrer. <a href="mailto:service@medfer.de?subject=Anfrage%20Laborfahrten" style="color:var(--teal-deep); font-weight:600;">Sprechen Sie uns an</a>.</div>
+
+      <div class="notice" data-i18n-html="notice.seated"><strong>Wichtiger Hinweis:</strong> Aktuell bieten wir ausschließlich Sitzendfahrten an — kein Liegend- oder Rollstuhltransport. Bitte sprechen Sie uns vorab an, damit wir die Fahrt passend planen können. Patientendaten und Fahrtdetails werden diskret behandelt.</div>
+
+      <div class="notice" style="margin-top:16px;" data-i18n-html="notice.area"><strong>Einzugsgebiet:</strong> Alle Frankfurter Stadtteile sowie das angrenzende Rhein-Main-Gebiet, u. a. Offenbach, Bad Vilbel, Oberursel, Neu-Isenburg und Dreieich. Bei Unsicherheit einfach kurz anrufen.</div>
+    </div>
+  </section>
+</main>
+
+<!-- RATGEBER & FAQ -->
+<main class="page" data-page="ratgeber">
+  <section>
+    <div class="wrap">
+      <p class="eyebrow" data-i18n="guide.eyebrow">Ratgeber</p>
+      <h2 class="section-title" data-i18n="guide.h2">Der Transportschein (Muster 4) einfach erklärt</h2>
+      <p class="section-sub" data-i18n="guide.sub">Für eine Krankenfahrt mit Kostenübernahme stellt Ihr behandelnder Arzt eine "Verordnung einer Krankenbeförderung" aus, bekannt als Muster 4. Darauf vermerkt er Grund, Art und Häufigkeit der Fahrt. Bei Dauerbehandlungen wie Dialyse oder Chemotherapie ist die Genehmigung durch die Krankenkasse oft vereinfacht — die genauen Regeln unterscheiden sich je nach Kasse, daher empfehlen wir, dies vorab kurz mit Ihrer Krankenkasse oder Ihrem Arzt zu klären. Mit dem ausgefüllten Schein übernehmen wir anschließend die komplette Abrechnung für Sie.</p>
+
+      <div class="svc-detail">
+        <span class="tag" data-i18n="guide.tag">Ratgeber</span>
+        <h3 data-i18n="guide.h3a">Dialysefahrten beantragen — so geht's</h3>
+        <p data-i18n="guide.pa">Sprechen Sie Ihren Nephrologen auf den Transportschein (Muster 4) für die Dialyse an — meist wird er direkt bei Einleitung der Dialysebehandlung mit ausgestellt und gilt für die gesamte Behandlungsdauer, nicht für jede einzelne Fahrt neu. Legen Sie uns den Schein bei der ersten Fahrt vor, den Rest der Abrechnung übernehmen wir mit Ihrer Krankenkasse.</p>
+      </div>
+
+      <div class="svc-detail">
+        <span class="tag" data-i18n="guide.tag">Ratgeber</span>
+        <h3 data-i18n="guide.h3b">Transportschein für die Chemotherapie</h3>
+        <p data-i18n="guide.pb">Auch für Fahrten zur Chemotherapie stellt Ihr behandelnder Onkologe das Muster 4 aus. Da sich der Therapieplan ändern kann, lohnt es sich, den Schein für den gesamten Zyklus statt für einzelne Termine ausstellen zu lassen — das erspart wiederholte Arztbesuche nur für das Formular. Fragen zur Genehmigungspflicht klären Sie am besten direkt mit Ihrer Krankenkasse.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0;">
+    <div class="wrap">
+      <p class="eyebrow" data-i18n="faq.eyebrow">Häufige Fragen</p>
+      <div class="faq">
+        <details>
+          <summary data-i18n="faq.q1">Übernimmt meine Krankenkasse die Kosten?</summary>
+          <p data-i18n="faq.a1">Bei Dialyse, Chemotherapie und bestimmten Dauerbehandlungen meist ja — vorausgesetzt, es liegt der Transportschein (Muster 4) vor. Wir rechnen die Fahrt dann direkt mit Ihrer Krankenkasse ab.</p>
+        </details>
+        <details>
+          <summary data-i18n="faq.q2">Was ist eine Serienfahrt?</summary>
+          <p data-i18n="faq.a2">Eine wiederkehrende Fahrt nach festem Plan, z. B. dreimal wöchentlich zur Dialyse — mit demselben Fahrer und derselben Abholzeit, damit Sie sich darauf verlassen können.</p>
+        </details>
+        <details>
+          <summary data-i18n="faq.q3">Bieten Sie auch Liegend- oder Rollstuhltransporte an?</summary>
+          <p data-i18n="faq.a3">Nein, aktuell ausschließlich Sitzendfahrten. Bitte sprechen Sie uns vorab an, falls besondere Unterstützung beim Ein- oder Aussteigen nötig ist.</p>
+        </details>
+        <details>
+          <summary data-i18n="faq.q4">Für wen sind die Laborfahrten gedacht?</summary>
+          <p data-i18n="faq.a4">Für Arztpraxen, Labore und Kliniken, die Proben oder Unterlagen zuverlässig und schnell transportiert haben möchten — mit festen Zeitfenstern auf Wunsch.</p>
+        </details>
+        <details>
+          <summary data-i18n="faq.q5">Wie weit im Voraus muss ich buchen?</summary>
+          <p data-i18n="faq.a5">Serienfahrten gerne langfristig einrichten. Einzelfahrten und Laborfahrten sind nach Verfügbarkeit auch kurzfristig möglich.</p>
+        </details>
+        <details>
+          <summary data-i18n="faq.q6">Wie bezahle ich?</summary>
+          <p data-i18n="faq.a6">Barzahlung ist möglich. Weitere Zahlungsarten bitte vorab kurz erfragen.</p>
+        </details>
+        <details>
+          <summary data-i18n="faq.q7">Gilt eine Online-Buchung schon als bestätigt?</summary>
+          <p data-i18n="faq.a7">Nein. Jede Buchung über die Website ist eine Anfrage. Erst die Rückmeldung per Telefon, E-Mail oder WhatsApp bestätigt die Fahrt verbindlich.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- IMPRESSUM -->
+<main class="page" data-page="impressum">
+  <section>
+    <div class="wrap">
+      <p class="eyebrow" data-i18n="imprint.eyebrow">Impressum</p>
+      <h2 class="section-title" data-i18n="imprint.h2">Angaben gemäß § 5 DDG</h2>
+      <div class="legal">
+        <p><strong>Muhammad Tayub Khan</strong><br><span data-i18n="imprint.sole">Einzelunternehmer</span><br>Breitenbachstraße 1<br>60487 Frankfurt am Main</p>
+        <p><strong data-i18n="imprint.contact">Kontakt</strong><br><span data-i18n="imprint.phone">Telefon</span>: 017648989575<br>E-Mail: service@medfer.de</p>
+        <p><strong data-i18n="imprint.ordnungsnr">Ordnungsnummer (Personenbeförderung)</strong><br>515<br><span data-i18n="imprint.authority">Zuständige Genehmigungsbehörde: Stadt Frankfurt am Main</span></p>
+        <p><strong data-i18n="imprint.vat">Umsatzsteuer-ID</strong><br>DE325835111</p>
+        <p><strong data-i18n="imprint.dispute">Verbraucherstreitbeilegung</strong><br><span data-i18n="imprint.disputetext">Wir sind nicht verpflichtet und nicht bereit, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</span></p>
+        <p data-i18n="imprint.note" style="font-size:0.82rem;">Rechtsverbindlich ist die deutsche Fassung dieses Impressums.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- DATENSCHUTZ -->
+<main class="page" data-page="datenschutz">
+  <section>
+    <div class="wrap">
+      <p class="eyebrow" data-i18n="privacy.eyebrow">Datenschutzerklärung</p>
+      <h2 class="section-title" data-i18n="privacy.h2">Wie wir mit Ihren Daten umgehen</h2>
+      <div class="legal">
+        <p data-i18n-html="privacy.p1"><strong>1. Verantwortlicher</strong><br>Muhammad Tayub Khan, Breitenbachstraße 1, 60487 Frankfurt am Main, Telefon 017648989575, E-Mail service@medfer.de.</p>
+        <p data-i18n-html="privacy.p2"><strong>2. Hosting der Website</strong><br>Diese Seite lädt keine Schriftarten, Skripte oder Inhalte von Drittanbietern — es werden keine Daten an Dritte wie Google übertragen, solange Sie nicht aktiv den WhatsApp-Button nutzen (siehe Punkt 4).</p>
+        <p data-i18n-html="privacy.p3"><strong>3. Buchungsformular</strong><br>Die von Ihnen eingegebenen Daten (Name, Telefon, Adressen, Datum, Art der Fahrt, ggf. Anmerkungen) werden ausschließlich lokal in Ihrem Browser zu einer E-Mail oder WhatsApp-Nachricht zusammengestellt und an uns übermittelt. Auf unserer Website selbst werden keine Formulardaten gespeichert.</p>
+        <p data-i18n-html="privacy.p4"><strong>4. Besondere Kategorien personenbezogener Daten</strong><br>Die Angabe der Behandlungsart (z. B. Dialyse, Chemotherapie) stellt eine Gesundheitsangabe im Sinne von Art. 9 DSGVO dar. Die Verarbeitung erfolgt auf Grundlage Ihrer ausdrücklichen Einwilligung (Art. 9 Abs. 2 lit. a DSGVO), die Sie beim Absenden des Formulars erteilen.</p>
+        <p data-i18n-html="privacy.p5"><strong>5. Versand per E-Mail / WhatsApp</strong><br>Nutzen Sie den E-Mail-Button, öffnet sich Ihr eigenes E-Mail-Programm; die Nachricht wird über Ihren E-Mail-Anbieter versendet. Nutzen Sie den WhatsApp-Button, wird die Nachricht über den Dienst WhatsApp (Meta Platforms Ireland Limited) übermittelt; hierbei gelten die Datenschutzbestimmungen von WhatsApp/Meta, ggf. mit Datenübermittlung in Drittländer.</p>
+        <p data-i18n-html="privacy.p6"><strong>6. Speicherdauer</strong><br>Ihre Angaben aus dem Buchungsformular werden nur so lange aufbewahrt, wie es zur Bearbeitung Ihrer Fahrt erforderlich ist. Für abrechnungsrelevante Unterlagen gelten die gesetzlichen Aufbewahrungsfristen (i. d. R. bis zu 10 Jahre); danach werden die Daten gelöscht.</p>
+        <p data-i18n-html="privacy.p7"><strong>7. Ihre Rechte</strong><br>Sie haben das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung Ihrer Daten sowie auf Widerruf einer erteilten Einwilligung mit Wirkung für die Zukunft. Wenden Sie sich dazu an die oben genannten Kontaktdaten.</p>
+        <p data-i18n="imprint.note" style="font-size:0.82rem;">Rechtsverbindlich ist die deutsche Fassung dieser Datenschutzerklärung.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Medfer · Muhammad Tayub Khan · Frankfurt</span>
+    <span class="legal-links"><a href="#" onclick="event.preventDefault(); showPage('impressum');" data-i18n="footer.imprint">Impressum</a> · <a href="#" onclick="event.preventDefault(); showPage('datenschutz');" data-i18n="footer.privacy">Datenschutz</a> · 017648989575</span>
+  </div>
+</footer>
+
+<script>
+var LANG = 'de';
+try { LANG = localStorage.getItem('medferLang') || 'de'; } catch (e) {}
+
+var I18N = {
+  "meta.title": {en: "Medfer — Medical Patient Transport, Frankfurt"},
+  "meta.desc": {en: "Medfer: specialised seated patient transport in Frankfurt — recurring rides for dialysis & chemotherapy, single rides to appointments, lab courier service. Direct billing with health insurers."},
+  "meta.ogdesc": {en: "Seated rides to dialysis, chemotherapy and doctor's appointments, plus express courier rides for labs — driven personally, on time and discreet."},
+  "nav.call": {en: "Call"},
+  "nav.start": {en: "Home"},
+  "nav.services": {en: "Services"},
+  "nav.guide": {en: "Guide & FAQ"},
+  "hero.eyebrow": {en: "Medical Patient Transport · Frankfurt"},
+  "hero.h1": {en: "Rides you can rely on."},
+  "hero.lede": {en: "Seated rides to dialysis, chemotherapy and doctor's appointments, plus express courier rides for labs — driven personally, on time and discreet."},
+  "hero.cta1": {en: "Request a ride"},
+  "hero.badge1": {en: "Licensed taxi business"},
+  "hero.badge2": {en: "One regular driver, no swapping"},
+  "hero.badge3": {en: "Discreet & punctual"},
+  "about.eyebrow": {en: "About us"},
+  "about.p": {en: "Medfer is a specialised seated transport service for patients in Frankfurt and the surrounding area. One regular driver, one vehicle, one direct line — instead of a rotating cast of drivers from a dispatch app. That keeps every ride personal, punctual and easy to follow."},
+  "driver.eyebrow": {en: "Your driver"},
+  "driver.h3": {en: "Always the same, always personal"},
+  "driver.p": {en: "Drives every ride personally — no swapping, no call centre. Call Medfer and you speak directly to the driver who will pick you up."},
+  "services.eyebrow": {en: "Core services"},
+  "svc1.h3": {en: "Recurring rides"},
+  "svc1.p": {en: "Dialysis & chemotherapy, on a fixed schedule"},
+  "svc2.h3": {en: "Single rides"},
+  "svc2.p": {en: "To doctor's and hospital appointments"},
+  "svc3.h3": {en: "Lab courier"},
+  "svc3.p": {en: "Express rides for laboratories"},
+  "cost.eyebrow": {en: "Cost coverage"},
+  "cost.h2": {en: "We bill your health insurer directly"},
+  "cost.sub": {en: "With the transport prescription (Muster 4) from your doctor, we handle the billing — nothing further for you to arrange."},
+  "step1.h3": {en: "Prescription from your doctor"},
+  "step1.p": {en: "Your doctor issues the transport prescription (Muster 4)."},
+  "step2.h3": {en: "Arrange the ride"},
+  "step2.p": {en: "You or the clinic get in touch with us and we plan the ride."},
+  "step3.h3": {en: "Direct billing"},
+  "step3.p": {en: "We bill the ride directly with your health insurer."},
+  "booking.eyebrow": {en: "Book a ride"},
+  "field.name": {en: "Name *"},
+  "field.phone": {en: "Phone *"},
+  "field.pickup": {en: "Pick-up address *"},
+  "field.dropoff": {en: "Destination address *"},
+  "field.date": {en: "Date *"},
+  "field.time": {en: "Time *"},
+  "field.kind": {en: "Type of ride *"},
+  "field.note": {en: "Notes"},
+  "field.noteph": {en: "optional"},
+  "opt.placeholder": {en: "Please select"},
+  "opt.1": {en: "Recurring ride (dialysis)"},
+  "opt.2": {en: "Recurring ride (chemotherapy)"},
+  "opt.3": {en: "Single ride (doctor's appointment)"},
+  "opt.4": {en: "Hospital discharge / transfer"},
+  "opt.5": {en: "Lab courier (express)"},
+  "opt.6": {en: "Other seated ride"},
+  "consent.html": {en: 'I agree that my details — including the type of treatment — may be used to process this request. See the <a href="#" onclick="event.preventDefault(); showPage(\'datenschutz\');">privacy policy</a> for details.'},
+  "booking.mail": {en: "Book by email"},
+  "booking.whatsapp": {en: "Book via WhatsApp"},
+  "booking.fnote": {en: "This is a request, not an automatic confirmation — we'll get back to you by phone, email or WhatsApp. Currently seated rides only."},
+  "contact.h2": {en: "Reach us directly"},
+  "contact.p": {en: "You'll usually reach us right away."},
+  "contact.email": {en: "✉ Email"},
+  "svcpage.h2": {en: "Every type of ride in detail"},
+  "svcpage.tag1": {en: "Recurring"},
+  "svcpage.tag2": {en: "One-off"},
+  "svcpage.tag3": {en: "Hospitals"},
+  "svcpage.tag4": {en: "Labs"},
+  "svcpage.h3-discharge": {en: "Discharge & transfer"},
+  "svcpage.h3-lab": {en: "Lab courier (express)"},
+  "svcpage.p1": {en: "For dialysis, chemotherapy and other regular treatments, every minute counts. Recurring rides run on a fixed schedule — the same driver, the same pick-up time, week after week. You never miss an appointment and never have to re-arrange things each time."},
+  "svcpage.p2": {en: "For individual doctor's or hospital appointments — flexible to book, including at short notice depending on availability. Ideal alongside recurring rides or for spontaneous appointments."},
+  "svcpage.p3": {en: "One fixed contact instead of a rotating driver from a dispatch app. Short-notice appointments for discharges or transfers depending on availability, with a direct phone response."},
+  "svcpage.p4": {en: "Fast transport of samples and documents between practices, labs and hospitals. Fixed time windows on request, short-notice pick-up by arrangement."},
+  "notice.labs": {en: '<strong>For labs & medical practices:</strong> For recurring sample transport we can set up a fixed pick-up time — with one direct contact instead of a rotating driver. <a href="mailto:service@medfer.de?subject=Lab%20courier%20enquiry" style="color:var(--teal-deep); font-weight:600;">Get in touch</a>.'},
+  "notice.seated": {en: "<strong>Important:</strong> We currently offer seated transport only — no lying-down or wheelchair transport. Please contact us in advance so we can plan the ride accordingly. Patient data and ride details are handled discreetly."},
+  "notice.area": {en: "<strong>Service area:</strong> All Frankfurt districts plus the surrounding Rhine-Main region, including Offenbach, Bad Vilbel, Oberursel, Neu-Isenburg and Dreieich. If unsure, just give us a call."},
+  "guide.eyebrow": {en: "Guide"},
+  "guide.h2": {en: "The transport prescription (Muster 4), explained simply"},
+  "guide.sub": {en: "For a medical ride with cost coverage, your treating doctor issues a \"prescription for medical transport\", known as Muster 4. It states the reason, type and frequency of the ride. For ongoing treatments like dialysis or chemotherapy, approval by the health insurer is often simplified — exact rules vary by insurer, so we recommend checking briefly with your insurer or doctor beforehand. Once you hand us the completed form, we take care of the entire billing for you."},
+  "guide.tag": {en: "Guide"},
+  "guide.h3a": {en: "Arranging dialysis rides — how it works"},
+  "guide.h3b": {en: "Transport prescription for chemotherapy"},
+  "guide.pa": {en: "Ask your nephrologist about the transport prescription (Muster 4) for dialysis — it's usually issued right when dialysis treatment begins and covers the whole treatment period, not each individual ride. Show us the form on your first ride; we take care of the rest of the billing with your health insurer."},
+  "guide.pb": {en: "Your oncologist also issues the Muster 4 for chemotherapy rides. Since treatment plans can change, it's worth having the form issued for the whole cycle rather than single appointments — saving repeat doctor visits just for the paperwork. For questions about approval requirements, check directly with your health insurer."},
+  "faq.eyebrow": {en: "Frequently asked questions"},
+  "faq.q1": {en: "Will my health insurer cover the cost?"},
+  "faq.a1": {en: "For dialysis, chemotherapy and certain ongoing treatments, usually yes — provided the transport prescription (Muster 4) is available. We then bill the ride directly with your health insurer."},
+  "faq.q2": {en: "What is a recurring ride?"},
+  "faq.a2": {en: "A repeating ride on a fixed schedule, e.g. three times a week to dialysis — with the same driver and the same pick-up time, so you can rely on it."},
+  "faq.q3": {en: "Do you also offer lying-down or wheelchair transport?"},
+  "faq.a3": {en: "No, currently seated rides only. Please let us know in advance if you need particular support getting in or out."},
+  "faq.q4": {en: "Who is the lab courier service for?"},
+  "faq.a4": {en: "For medical practices, labs and hospitals that need samples or documents transported reliably and quickly — with fixed time windows on request."},
+  "faq.q5": {en: "How far in advance do I need to book?"},
+  "faq.a5": {en: "Recurring rides can be set up well in advance. Single rides and lab courier runs are also possible at short notice, depending on availability."},
+  "faq.q6": {en: "How do I pay?"},
+  "faq.a6": {en: "Cash payment is possible. Please ask in advance about other payment methods."},
+  "faq.q7": {en: "Does an online booking already count as confirmed?"},
+  "faq.a7": {en: "No. Every booking through the website is a request. Only a reply by phone, email or WhatsApp confirms the ride."},
+  "imprint.eyebrow": {en: "Legal notice"},
+  "imprint.h2": {en: "Information pursuant to § 5 DDG"},
+  "imprint.sole": {en: "Sole trader"},
+  "imprint.contact": {en: "Contact"},
+  "imprint.phone": {en: "Phone"},
+  "imprint.ordnungsnr": {en: "Licence number (passenger transport)"},
+  "imprint.authority": {en: "Competent licensing authority: City of Frankfurt am Main"},
+  "imprint.vat": {en: "VAT ID"},
+  "imprint.dispute": {en: "Consumer dispute resolution"},
+  "imprint.disputetext": {en: "We are not obliged and not willing to take part in dispute resolution proceedings before a consumer arbitration board."},
+  "imprint.note": {en: "The German version of this notice is the legally binding one."},
+  "privacy.eyebrow": {en: "Privacy policy"},
+  "privacy.h2": {en: "How we handle your data"},
+  "privacy.p1": {en: "<strong>1. Controller</strong><br>Muhammad Tayub Khan, Breitenbachstraße 1, 60487 Frankfurt am Main, Germany, phone 017648989575, email service@medfer.de."},
+  "privacy.p2": {en: "<strong>2. Hosting of this website</strong><br>This page does not load any fonts, scripts or content from third parties — no data is transmitted to third parties such as Google, unless you actively use the WhatsApp button (see point 4)."},
+  "privacy.p3": {en: "<strong>3. Booking form</strong><br>The data you enter (name, phone, addresses, date, type of ride, any notes) is assembled locally in your browser into an email or WhatsApp message and sent to us. No form data is stored on our website itself."},
+  "privacy.p4": {en: "<strong>4. Special categories of personal data</strong><br>Stating the type of treatment (e.g. dialysis, chemotherapy) constitutes health data within the meaning of Art. 9 GDPR. Processing is based on your explicit consent (Art. 9(2)(a) GDPR), given when you submit the form."},
+  "privacy.p5": {en: "<strong>5. Sending by email / WhatsApp</strong><br>Using the email button opens your own email program; the message is sent via your email provider. Using the WhatsApp button sends the message via WhatsApp (Meta Platforms Ireland Limited); WhatsApp/Meta's own privacy terms apply, possibly including data transfer to third countries."},
+  "privacy.p6": {en: "<strong>6. Retention period</strong><br>Your booking form details are kept only as long as necessary to process your ride. Statutory retention periods apply to billing-related records (generally up to 10 years); afterwards the data is deleted."},
+  "privacy.p7": {en: "<strong>7. Your rights</strong><br>You have the right to access, rectification, erasure and restriction of processing of your data, and to withdraw any consent given with effect for the future. Please use the contact details above."},
+  "footer.imprint": {en: "Legal notice"},
+  "footer.privacy": {en: "Privacy"}
+};
+
+function applyLang(lang){
+  LANG = lang;
+  try { localStorage.setItem('medferLang', lang); } catch (e) {}
+  document.documentElement.lang = lang;
+  document.getElementById('langToggle').textContent = (lang === 'de') ? 'EN' : 'DE';
+
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    var key = el.getAttribute('data-i18n');
+    var entry = I18N[key];
+    var attr = el.getAttribute('data-i18n-attr');
+    if (el.dataset.de === undefined) el.dataset.de = attr ? el.getAttribute(attr) : el.textContent;
+    var text = (lang === 'en' && entry && entry.en) ? entry.en : el.dataset.de;
+    if (attr) {
+      el.setAttribute(attr, text);
+    } else {
+      el.textContent = text;
+    }
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(function(el){
+    var key = el.getAttribute('data-i18n-html');
+    var entry = I18N[key];
+    if (!el.dataset.deHtml) el.dataset.deHtml = el.innerHTML;
+    el.innerHTML = (lang === 'en' && entry && entry.en) ? entry.en : el.dataset.deHtml;
+  });
+}
+
+function toggleLang(){
+  applyLang(LANG === 'de' ? 'en' : 'de');
+}
+
+function showPage(id){
+  document.querySelectorAll('.page').forEach(function(p){ p.classList.toggle('active', p.dataset.page===id); });
+  document.querySelectorAll('.tab').forEach(function(t){ t.classList.toggle('active', t.dataset.target===id); });
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+(function () {
+  if (LANG === 'en') applyLang('en');
+
+  var main = document.getElementById('bookingForm');
+  var LABELS = {
+    de: {name:'Name', phone:'Telefon', pickup:'Abholadresse', dropoff:'Zieladresse', date:'Datum', time:'Uhrzeit', kind:'Art der Fahrt', note:'Anmerkungen', subject:'Buchungsanfrage', waHeader:'Buchungsanfrage'},
+    en: {name:'Name', phone:'Phone', pickup:'Pick-up address', dropoff:'Destination', date:'Date', time:'Time', kind:'Type of ride', note:'Notes', subject:'Booking request', waHeader:'Booking request'}
+  };
+  main.querySelectorAll('button[type="submit"]').forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      if (!main.reportValidity()) return;
+      var d = Object.fromEntries(new FormData(main).entries());
+      var L = LABELS[LANG] || LABELS.de;
+      var lines = [L.name+': ' + d.name, L.phone+': ' + d.phone, L.pickup+': ' + d.pickup, L.dropoff+': ' + d.dropoff, L.date+': ' + d.date, L.time+': ' + d.time, L.kind+': ' + d.kind, d.note ? L.note+': ' + d.note : null].filter(Boolean).join('\n');
+      if (btn.dataset.mode === 'mail') {
+        window.location.href = 'mailto:service@medfer.de?subject=' + encodeURIComponent(L.subject + ': ' + d.kind + ' – ' + d.date) + '&body=' + encodeURIComponent(lines);
+      } else {
+        window.open('https://wa.me/49017648989575?text=' + encodeURIComponent(L.waHeader + '\n' + lines), '_blank');
+      }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
