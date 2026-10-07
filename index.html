@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title data-i18n="meta.title">Medfer — Medizinischer Patiententransport, Frankfurt</title>
-<meta name="description" data-i18n-attr="content" data-i18n="meta.desc" content="Medfer: spezialisierter Sitzendtransport für Patienten in Frankfurt — Serienfahrten zu Dialyse, Chemo- & Strahlentherapie, Krankenhausfahrten (Aufnahme, Entlassung, Verlegung), ambulante OPs, Arzttermine, Laborfahrten. Direkte Abrechnung mit der Krankenkasse.">
+<meta name="description" data-i18n-attr="content" data-i18n="meta.desc" content="Medfer: spezialisierter Sitzendtransport für Patienten in Frankfurt — Serienfahrten zu Dialyse, Chemo- & Strahlentherapie, Krankenhausfahrten (Aufnahme, Entlassung, Verlegung), ambulante OPs, Arzttermine, Laborfahrten. Abrechnung über den Transportschein.">
 <meta property="og:title" data-i18n-attr="content" data-i18n="meta.title" content="Medfer — Medizinischer Patiententransport, Frankfurt">
 <meta property="og:description" data-i18n-attr="content" data-i18n="meta.ogdesc" content="Sitzendfahrten zu Dialyse, Chemo- und Strahlentherapie, ins Krankenhaus, zu ambulanten Operationen und Arztterminen sowie Laborfahrten — persönlich gefahren, pünktlich und diskret.">
 <meta property="og:type" content="website">
@@ -303,13 +303,13 @@
 
   <section style="padding-top:0;">
     <div class="wrap">
-      <p class="eyebrow" data-i18n="cost.eyebrow">Kostenübernahme</p>
-      <h2 class="section-title" data-i18n="cost.h2">Wir rechnen direkt mit Ihrer Krankenkasse ab</h2>
-      <p class="section-sub" data-i18n="cost.sub">Mit dem Transportschein (Muster 4) Ihres Arztes übernehmen wir die Abrechnung — Sie müssen sich um nichts weiter kümmern.</p>
+      <p class="eyebrow" data-i18n="cost.eyebrow">Abrechnung</p>
+      <h2 class="section-title" data-i18n="cost.h2">Fahrten mit Transportschein</h2>
+      <p class="section-sub" data-i18n="cost.sub">Liegt eine ärztliche Verordnung (Muster 4) vor, kümmern wir uns um die Abrechnung über den Transportschein.</p>
       <div class="steps">
         <div class="step-card"><div class="step-num">1</div><h3 data-i18n="step1.h3">Verordnung vom Arzt</h3><p data-i18n="step1.p">Ihr Arzt stellt den Transportschein (Muster 4) aus.</p></div>
         <div class="step-card"><div class="step-num">2</div><h3 data-i18n="step2.h3">Fahrt vereinbaren</h3><p data-i18n="step2.p">Sie oder die Klinik melden sich bei uns, wir planen die Fahrt.</p></div>
-        <div class="step-card"><div class="step-num">3</div><h3 data-i18n="step3.h3">Direkte Abrechnung</h3><p data-i18n="step3.p">Wir rechnen die Fahrt direkt mit Ihrer Krankenkasse ab.</p></div>
+        <div class="step-card"><div class="step-num">3</div><h3 data-i18n="step3.h3">Abrechnung über den Schein</h3><p data-i18n="step3.p">Bringen Sie den Transportschein zur ersten Fahrt mit, die Abrechnung erledigen wir.</p></div>
       </div>
     </div>
   </section>
@@ -319,6 +319,7 @@
       <p class="eyebrow" data-i18n="booking.eyebrow">Fahrt buchen</p>
       <div class="booking-form">
         <form id="bookingForm">
+          <div style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>
           <div class="grid2">
             <div class="field"><label for="f-name" data-i18n="field.name">Name *</label><input id="f-name" name="name" required></div>
             <div class="field"><label for="f-phone" data-i18n="field.phone">Telefon *</label><input id="f-phone" name="phone" type="tel" required></div>
@@ -348,9 +349,10 @@
             <span data-i18n-html="consent.html">Ich bin einverstanden, dass meine Angaben — auch zur Art der Behandlung — zur Bearbeitung dieser Anfrage verwendet werden. Details in der <a href="#" onclick="event.preventDefault(); showPage('datenschutz');">Datenschutzerklärung</a>.</span>
           </label>
           <div class="actions">
-            <button type="submit" class="btn-dark" data-mode="mail" data-i18n="booking.mail">Per E-Mail buchen</button>
+            <button type="submit" class="btn-dark" data-mode="send" data-i18n="booking.send">Anfrage senden</button>
             <button type="submit" class="btn-outline" data-mode="whatsapp" data-i18n="booking.whatsapp">Per WhatsApp</button>
           </div>
+          <p id="bookStatus" role="status" aria-live="polite" style="margin:10px 0 0;font-weight:600"></p>
           <p class="fnote" data-i18n="booking.fnote">Anfrage, keine automatische Bestätigung — Rückmeldung folgt per Telefon, E-Mail oder WhatsApp. Aktuell ausschließlich Sitzendfahrten.</p>
         </form>
       </div>
@@ -435,12 +437,12 @@
     <div class="wrap">
       <p class="eyebrow" data-i18n="guide.eyebrow">Ratgeber</p>
       <h2 class="section-title" data-i18n="guide.h2">Der Transportschein (Muster 4) einfach erklärt</h2>
-      <p class="section-sub" data-i18n="guide.sub">Für eine Krankenfahrt mit Kostenübernahme stellt Ihr behandelnder Arzt eine "Verordnung einer Krankenbeförderung" aus, bekannt als Muster 4. Darauf vermerkt er Grund, Art und Häufigkeit der Fahrt. Bei Dauerbehandlungen wie Dialyse oder Chemotherapie ist die Genehmigung durch die Krankenkasse oft vereinfacht — die genauen Regeln unterscheiden sich je nach Kasse, daher empfehlen wir, dies vorab kurz mit Ihrer Krankenkasse oder Ihrem Arzt zu klären. Mit dem ausgefüllten Schein übernehmen wir anschließend die komplette Abrechnung für Sie.</p>
+      <p class="section-sub" data-i18n="guide.sub">Für eine Krankenfahrt stellt Ihr behandelnder Arzt eine „Verordnung einer Krankenbeförderung“ aus, bekannt als Muster 4. Darauf vermerkt er Grund, Art und Häufigkeit der Fahrt. Ob und in welchem Umfang die Fahrt übernommen wird, entscheidet Ihre Krankenkasse. Klären Sie Fragen dazu am besten vorab mit Ihrem Arzt oder Ihrer Krankenkasse. Mit dem ausgefüllten Schein kümmern wir uns um die Abrechnung.</p>
 
       <div class="svc-detail">
         <span class="tag" data-i18n="guide.tag">Ratgeber</span>
         <h3 data-i18n="guide.h3a">Dialysefahrten beantragen — so geht's</h3>
-        <p data-i18n="guide.pa">Sprechen Sie Ihren Nephrologen auf den Transportschein (Muster 4) für die Dialyse an — meist wird er direkt bei Einleitung der Dialysebehandlung mit ausgestellt und gilt für die gesamte Behandlungsdauer, nicht für jede einzelne Fahrt neu. Legen Sie uns den Schein bei der ersten Fahrt vor, den Rest der Abrechnung übernehmen wir mit Ihrer Krankenkasse.</p>
+        <p data-i18n="guide.pa">Sprechen Sie Ihren Nephrologen auf den Transportschein (Muster 4) für die Dialyse an — meist wird er direkt bei Einleitung der Dialysebehandlung mit ausgestellt und gilt für die gesamte Behandlungsdauer, nicht für jede einzelne Fahrt neu. Bringen Sie den Schein zur ersten Fahrt mit, um die Abrechnung kümmern wir uns.</p>
       </div>
 
       <div class="svc-detail">
@@ -456,8 +458,8 @@
       <p class="eyebrow" data-i18n="faq.eyebrow">Häufige Fragen</p>
       <div class="faq">
         <details>
-          <summary data-i18n="faq.q1">Übernimmt meine Krankenkasse die Kosten?</summary>
-          <p data-i18n="faq.a1">In vielen Fällen ja, wenn der Transportschein (Muster 4) vorliegt. Dazu gehören Fahrten ins Krankenhaus (Aufnahme, Entlassung, Verlegung), zu vor- und nachstationären Behandlungen und zu ambulanten Operationen, die einen Krankenhausaufenthalt ersetzen. Fahrten zu ambulanten Behandlungen zahlt die Kasse nur in bestimmten Fällen, z. B. bei Dialyse, Chemo- oder Strahlentherapie, bei Pflegegrad 4 oder 5, bei Pflegegrad 3 mit eingeschränkter Mobilität oder mit Schwerbehindertenausweis (Merkzeichen aG, Bl oder H). Die gesetzliche Zuzahlung beträgt 10 % der Fahrtkosten, mindestens 5 € und höchstens 10 € pro Fahrt. Im Zweifel klären Sie es kurz mit Ihrer Krankenkasse; ohne Kostenübernahme fahren wir Sie zum regulären Taxitarif.</p>
+          <summary data-i18n="faq.q1">Wer entscheidet über die Kosten der Fahrt?</summary>
+          <p data-i18n="faq.a1">Darüber entscheidet Ihre Krankenkasse nach den gesetzlichen Vorgaben. Grundlage ist die ärztliche Verordnung (Muster 4); für manche Fahrten ist vorab eine Genehmigung der Krankenkasse nötig. Fragen zur Kostenübernahme klären Sie bitte mit Ihrem Arzt oder Ihrer Krankenkasse. Ohne Verordnung fahren wir Sie zum regulären Taxitarif.</p>
         </details>
         <details>
           <summary data-i18n="faq.q2">Was ist eine Serienfahrt?</summary>
@@ -514,10 +516,10 @@
       <h2 class="section-title" data-i18n="privacy.h2">Wie wir mit Ihren Daten umgehen</h2>
       <div class="legal">
         <p data-i18n-html="privacy.p1"><strong>1. Verantwortlicher</strong><br>Muhammad Tayub Khan, Breitenbachstraße 1, 60487 Frankfurt am Main, Telefon 017648989575, E-Mail service@medfer.de.</p>
-        <p data-i18n-html="privacy.p2"><strong>2. Hosting der Website</strong><br>Diese Seite lädt keine Schriftarten, Skripte oder Inhalte von Drittanbietern — es werden keine Daten an Dritte wie Google übertragen, solange Sie nicht aktiv den WhatsApp-Button nutzen (siehe Punkt 4).</p>
-        <p data-i18n-html="privacy.p3"><strong>3. Buchungsformular</strong><br>Die von Ihnen eingegebenen Daten (Name, Telefon, Adressen, Datum, Art der Fahrt, ggf. Anmerkungen) werden ausschließlich lokal in Ihrem Browser zu einer E-Mail oder WhatsApp-Nachricht zusammengestellt und an uns übermittelt. Auf unserer Website selbst werden keine Formulardaten gespeichert.</p>
+        <p data-i18n-html="privacy.p2"><strong>2. Hosting der Website</strong><br>Diese Website wird bei GitHub Pages (GitHub, Inc., USA) gehostet. Beim Aufruf verarbeitet GitHub technisch notwendige Daten wie Ihre IP-Adresse, um die Seite auszuliefern. Die Seite lädt keine Schriftarten oder Skripte von weiteren Drittanbietern.</p>
+        <p data-i18n-html="privacy.p3"><strong>3. Buchungsformular</strong><br>Wenn Sie „Anfrage senden“ nutzen, werden Ihre Angaben (Name, Telefon, Adressen, Datum, Uhrzeit, Art der Fahrt, ggf. Anmerkungen) verschlüsselt an unser E-Mail-Postfach service@medfer.de übermittelt. Dafür nutzen wir Google Workspace (Google Ireland Limited) als Auftragsverarbeiter. Auf der Website selbst werden keine Formulardaten gespeichert.</p>
         <p data-i18n-html="privacy.p4"><strong>4. Besondere Kategorien personenbezogener Daten</strong><br>Die Angabe der Behandlungsart (z. B. Dialyse, Chemotherapie) stellt eine Gesundheitsangabe im Sinne von Art. 9 DSGVO dar. Die Verarbeitung erfolgt auf Grundlage Ihrer ausdrücklichen Einwilligung (Art. 9 Abs. 2 lit. a DSGVO), die Sie beim Absenden des Formulars erteilen.</p>
-        <p data-i18n-html="privacy.p5"><strong>5. Versand per E-Mail / WhatsApp</strong><br>Nutzen Sie den E-Mail-Button, öffnet sich Ihr eigenes E-Mail-Programm; die Nachricht wird über Ihren E-Mail-Anbieter versendet. Nutzen Sie den WhatsApp-Button, wird die Nachricht über den Dienst WhatsApp (Meta Platforms Ireland Limited) übermittelt; hierbei gelten die Datenschutzbestimmungen von WhatsApp/Meta, ggf. mit Datenübermittlung in Drittländer.</p>
+        <p data-i18n-html="privacy.p5"><strong>5. Versand per WhatsApp</strong><br>Nutzen Sie den WhatsApp-Button, wird die Nachricht über den Dienst WhatsApp (Meta Platforms Ireland Limited) übermittelt; hierbei gelten die Datenschutzbestimmungen von WhatsApp/Meta, ggf. mit Datenübermittlung in Drittländer.</p>
         <p data-i18n-html="privacy.p6"><strong>6. Speicherdauer</strong><br>Ihre Angaben aus dem Buchungsformular werden nur so lange aufbewahrt, wie es zur Bearbeitung Ihrer Fahrt erforderlich ist. Für abrechnungsrelevante Unterlagen gelten die gesetzlichen Aufbewahrungsfristen (i. d. R. bis zu 10 Jahre); danach werden die Daten gelöscht.</p>
         <p data-i18n-html="privacy.p7"><strong>7. Ihre Rechte</strong><br>Sie haben das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung Ihrer Daten sowie auf Widerruf einer erteilten Einwilligung mit Wirkung für die Zukunft. Wenden Sie sich dazu an die oben genannten Kontaktdaten.</p>
         <p data-i18n="imprint.note" style="font-size:0.82rem;">Rechtsverbindlich ist die deutsche Fassung dieser Datenschutzerklärung.</p>
@@ -539,7 +541,7 @@ try { LANG = localStorage.getItem('medferLang') || 'de'; } catch (e) {}
 
 var I18N = {
   "meta.title": {en: "Medfer — Medical Patient Transport, Frankfurt"},
-  "meta.desc": {en: "Medfer: specialised seated patient transport in Frankfurt — recurring rides for dialysis, chemotherapy & radiotherapy, hospital admission, discharge & transfer, day surgery, appointments, lab courier service. Direct billing with health insurers."},
+  "meta.desc": {en: "Medfer: specialised seated patient transport in Frankfurt — recurring rides for dialysis, chemotherapy & radiotherapy, hospital admission, discharge & transfer, day surgery, appointments, lab courier service. Billing via the transport prescription."},
   "meta.ogdesc": {en: "Seated rides to dialysis, chemotherapy and radiotherapy, to and from hospital, to day surgery and doctor's appointments, plus lab courier runs — driven personally, on time and discreet."},
   "nav.call": {en: "Call"},
   "nav.start": {en: "Home"},
@@ -566,15 +568,15 @@ var I18N = {
   "svc4.p": {en: "Admission, discharge & transfer"},
   "svc3.h3": {en: "Lab courier"},
   "svc3.p": {en: "Express rides for laboratories"},
-  "cost.eyebrow": {en: "Cost coverage"},
-  "cost.h2": {en: "We bill your health insurer directly"},
-  "cost.sub": {en: "With the transport prescription (Muster 4) from your doctor, we handle the billing — nothing further for you to arrange."},
+  "cost.eyebrow": {en: "Billing"},
+  "cost.h2": {en: "Rides with a transport prescription"},
+  "cost.sub": {en: "If you have a doctor's prescription (Muster 4), we take care of billing via the transport prescription."},
   "step1.h3": {en: "Prescription from your doctor"},
   "step1.p": {en: "Your doctor issues the transport prescription (Muster 4)."},
   "step2.h3": {en: "Arrange the ride"},
   "step2.p": {en: "You or the clinic get in touch with us and we plan the ride."},
-  "step3.h3": {en: "Direct billing"},
-  "step3.p": {en: "We bill the ride directly with your health insurer."},
+  "step3.h3": {en: "Billing via the form"},
+  "step3.p": {en: "Bring the transport prescription to your first ride, we handle the billing."},
   "booking.eyebrow": {en: "Book a ride"},
   "field.name": {en: "Name *"},
   "field.phone": {en: "Phone *"},
@@ -597,7 +599,7 @@ var I18N = {
   "opt.5": {en: "Lab courier (express)"},
   "opt.6": {en: "Other seated ride"},
   "consent.html": {en: 'I agree that my details — including the type of treatment — may be used to process this request. See the <a href="#" onclick="event.preventDefault(); showPage(\'datenschutz\');">privacy policy</a> for details.'},
-  "booking.mail": {en: "Book by email"},
+  "booking.send": {en: "Send request"},
   "booking.whatsapp": {en: "Book via WhatsApp"},
   "booking.fnote": {en: "This is a request, not an automatic confirmation — we'll get back to you by phone, email or WhatsApp. Currently seated rides only."},
   "contact.h2": {en: "Reach us directly"},
@@ -627,15 +629,15 @@ var I18N = {
   "notice.area": {en: "<strong>Service area:</strong> All Frankfurt districts plus the surrounding Rhine-Main region, including Offenbach, Bad Vilbel, Oberursel, Neu-Isenburg and Dreieich. If unsure, just give us a call."},
   "guide.eyebrow": {en: "Guide"},
   "guide.h2": {en: "The transport prescription (Muster 4), explained simply"},
-  "guide.sub": {en: "For a medical ride with cost coverage, your treating doctor issues a \"prescription for medical transport\", known as Muster 4. It states the reason, type and frequency of the ride. For ongoing treatments like dialysis or chemotherapy, approval by the health insurer is often simplified — exact rules vary by insurer, so we recommend checking briefly with your insurer or doctor beforehand. Once you hand us the completed form, we take care of the entire billing for you."},
+  "guide.sub": {en: "For a medical ride, your treating doctor issues a \"prescription for medical transport\", known as Muster 4. It states the reason, type and frequency of the ride. Whether and to what extent the ride is covered is decided by your health insurer; please clarify questions with your doctor or insurer in advance. With the completed form, we take care of billing."},
   "guide.tag": {en: "Guide"},
   "guide.h3a": {en: "Arranging dialysis rides — how it works"},
   "guide.h3b": {en: "Transport prescription for chemo- and radiotherapy"},
-  "guide.pa": {en: "Ask your nephrologist about the transport prescription (Muster 4) for dialysis — it's usually issued right when dialysis treatment begins and covers the whole treatment period, not each individual ride. Show us the form on your first ride; we take care of the rest of the billing with your health insurer."},
+  "guide.pa": {en: "Ask your nephrologist about the transport prescription (Muster 4) for dialysis — it's usually issued right when dialysis treatment begins and covers the whole treatment period, not each individual ride. Bring the form to your first ride, we take care of the billing."},
   "guide.pb": {en: "Your treating doctor also issues the Muster 4 for chemotherapy or radiotherapy rides. Since treatment plans can change, it's worth having the form issued for the whole cycle rather than single appointments — saving repeat doctor visits just for the paperwork. For questions about approval requirements, check directly with your health insurer."},
   "faq.eyebrow": {en: "Frequently asked questions"},
-  "faq.q1": {en: "Will my health insurer cover the cost?"},
-  "faq.a1": {en: "In many cases yes, if you have the transport prescription (Muster 4). This includes rides to hospital (admission, discharge, transfer), to pre- and post-inpatient treatment and to outpatient surgery that replaces a hospital stay. Rides to outpatient treatment are only covered in specific cases, e.g. dialysis, chemo- or radiotherapy, care level 4 or 5, care level 3 with limited mobility, or a disability card with the marks aG, Bl or H. The statutory co-payment is 10% of the fare, at least €5 and at most €10 per ride. If in doubt, check with your health insurer; without coverage we drive you at the regular taxi rate."},
+  "faq.q1": {en: "Who decides on the cost of the ride?"},
+  "faq.a1": {en: "Your health insurer decides according to the statutory rules. The basis is the doctor's prescription (Muster 4); some rides require prior approval by the insurer. Please clarify cost questions with your doctor or insurer. Without a prescription we drive you at the regular taxi rate."},
   "faq.q2": {en: "What is a recurring ride?"},
   "faq.a2": {en: "A repeating ride on a fixed schedule, e.g. three times a week to dialysis — with the same driver and the same pick-up time, so you can rely on it."},
   "faq.q3": {en: "Do you also offer lying-down or wheelchair transport?"},
@@ -662,10 +664,10 @@ var I18N = {
   "privacy.eyebrow": {en: "Privacy policy"},
   "privacy.h2": {en: "How we handle your data"},
   "privacy.p1": {en: "<strong>1. Controller</strong><br>Muhammad Tayub Khan, Breitenbachstraße 1, 60487 Frankfurt am Main, Germany, phone 017648989575, email service@medfer.de."},
-  "privacy.p2": {en: "<strong>2. Hosting of this website</strong><br>This page does not load any fonts, scripts or content from third parties — no data is transmitted to third parties such as Google, unless you actively use the WhatsApp button (see point 4)."},
-  "privacy.p3": {en: "<strong>3. Booking form</strong><br>The data you enter (name, phone, addresses, date, type of ride, any notes) is assembled locally in your browser into an email or WhatsApp message and sent to us. No form data is stored on our website itself."},
+  "privacy.p2": {en: "<strong>2. Hosting of this website</strong><br>This website is hosted on GitHub Pages (GitHub, Inc., USA). When you visit, GitHub processes technically necessary data such as your IP address to deliver the page. The page loads no fonts or scripts from other third parties."},
+  "privacy.p3": {en: "<strong>3. Booking form</strong><br>When you use \"Send request\", your details (name, phone, addresses, date, time, type of ride, any notes) are transmitted encrypted to our mailbox service@medfer.de. We use Google Workspace (Google Ireland Limited) as processor for this. No form data is stored on the website itself."},
   "privacy.p4": {en: "<strong>4. Special categories of personal data</strong><br>Stating the type of treatment (e.g. dialysis, chemotherapy) constitutes health data within the meaning of Art. 9 GDPR. Processing is based on your explicit consent (Art. 9(2)(a) GDPR), given when you submit the form."},
-  "privacy.p5": {en: "<strong>5. Sending by email / WhatsApp</strong><br>Using the email button opens your own email program; the message is sent via your email provider. Using the WhatsApp button sends the message via WhatsApp (Meta Platforms Ireland Limited); WhatsApp/Meta's own privacy terms apply, possibly including data transfer to third countries."},
+  "privacy.p5": {en: "<strong>5. Sending via WhatsApp</strong><br>Using the WhatsApp button sends the message via WhatsApp (Meta Platforms Ireland Limited); WhatsApp/Meta's own privacy terms apply, possibly including data transfer to third countries."},
   "privacy.p6": {en: "<strong>6. Retention period</strong><br>Your booking form details are kept only as long as necessary to process your ride. Statutory retention periods apply to billing-related records (generally up to 10 years); afterwards the data is deleted."},
   "privacy.p7": {en: "<strong>7. Your rights</strong><br>You have the right to access, rectification, erasure and restriction of processing of your data, and to withdraw any consent given with effect for the future. Please use the contact details above."},
   "footer.imprint": {en: "Legal notice"},
@@ -711,6 +713,8 @@ function showPage(id){
 (function () {
   if (LANG === 'en') applyLang('en');
 
+  // Web-App-URL des Google-Apps-Skripts (sendet Anfragen an service@medfer.de)
+  var FORM_ENDPOINT = '';
   var main = document.getElementById('bookingForm');
   var LABELS = {
     de: {name:'Name', phone:'Telefon', pickup:'Abholadresse', dropoff:'Zieladresse', date:'Datum', time:'Uhrzeit', kind:'Art der Fahrt', note:'Anmerkungen', subject:'Buchungsanfrage', waHeader:'Buchungsanfrage'},
@@ -723,8 +727,20 @@ function showPage(id){
       var d = Object.fromEntries(new FormData(main).entries());
       var L = LABELS[LANG] || LABELS.de;
       var lines = [L.name+': ' + d.name, L.phone+': ' + d.phone, L.pickup+': ' + d.pickup, L.dropoff+': ' + d.dropoff, L.date+': ' + d.date, L.time+': ' + d.time, L.kind+': ' + d.kind, d.note ? L.note+': ' + d.note : null].filter(Boolean).join('\n');
-      if (btn.dataset.mode === 'mail') {
-        window.location.href = 'mailto:service@medfer.de?subject=' + encodeURIComponent(L.subject + ': ' + d.kind + ' – ' + d.date) + '&body=' + encodeURIComponent(lines);
+      if (btn.dataset.mode === 'send') {
+        if (d.website) return;
+        var st = document.getElementById('bookStatus');
+        var M = {de:{sending:'Anfrage wird gesendet …', ok:'Danke! Ihre Anfrage ist bei uns angekommen. Wir melden uns schnellstmöglich.', err:'Senden hat nicht geklappt. Bitte rufen Sie uns an: 0176 48989575.'}, en:{sending:'Sending your request …', ok:'Thank you! Your request has reached us. We will get back to you as soon as possible.', err:'Sending failed. Please call us: +49 176 48989575.'}}[LANG] || {};
+        if (!FORM_ENDPOINT) {
+          window.location.href = 'mailto:service@medfer.de?subject=' + encodeURIComponent(L.subject + ': ' + d.kind + ' – ' + d.date) + '&body=' + encodeURIComponent(lines);
+          return;
+        }
+        btn.disabled = true; st.textContent = M.sending;
+        var body = new URLSearchParams({name:d.name||'', phone:d.phone||'', pickup:d.pickup||'', dropoff:d.dropoff||'', date:d.date||'', time:d.time||'', kind:d.kind||'', note:d.note||'', lang:LANG, website:d.website||''});
+        fetch(FORM_ENDPOINT, {method:'POST', mode:'no-cors', body:body})
+          .then(function(){ st.textContent = M.ok; main.reset(); })
+          .catch(function(){ st.textContent = M.err; })
+          .finally(function(){ btn.disabled = false; });
       } else {
         window.open('https://wa.me/4917648989575?text=' + encodeURIComponent(L.waHeader + '\n' + lines), '_blank');
       }
