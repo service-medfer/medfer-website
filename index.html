@@ -119,12 +119,25 @@
   .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 18px; }
   .field { display: grid; gap: 5px; }
   .field.full { grid-column: 1 / -1; }
+  .grid2 > *, .field { min-width: 0; }
+  .field input, .field select { width: 100%; min-width: 0; box-sizing: border-box; font: inherit; }
   .field label { font-size: 0.84rem; color: var(--ink-soft); font-weight: 600; }
   .field input, .field select { border: 1px solid var(--line); border-radius: 9px; padding: 11px 12px; background: #fff; }
   .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
   .btn-dark { background: var(--ink); color: #fff; border: none; border-radius: 9px; padding: 13px 22px; font-weight: 700; cursor: pointer; }
   .btn-outline { background: #fff; color: var(--ink); border: 1px solid var(--ink); border-radius: 9px; padding: 13px 22px; font-weight: 700; cursor: pointer; }
   .fnote { margin-top: 12px; font-size: 0.8rem; color: var(--ink-soft); }
+  .sammel-toggle { grid-column: 1 / -1; display: flex; gap: 10px; align-items: flex-start; background: var(--teal-pale); border-radius: 10px; padding: 12px 14px; cursor: pointer; font-size: 0.92rem; }
+  .sammel-toggle input { margin-top: 3px; width: 18px; height: 18px; flex: none; }
+  .sammel-toggle small { display: block; color: var(--ink-soft); font-size: 0.8rem; }
+  .sammel { grid-column: 1 / -1; display: grid; gap: 12px; border: 1px dashed var(--line); border-radius: 12px; padding: 14px; }
+  .sammel[hidden] { display: none; }
+  .sammel-row { display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; align-items: end; }
+  .sammel-row .rm { border: 0; background: none; color: var(--ink-soft); font: inherit; font-size: 0.82rem; cursor: pointer; text-decoration: underline; padding: 10px 0; }
+  .sammel-add { justify-self: start; border: 1px solid var(--line); background: #fff; border-radius: 9px; padding: 8px 12px; font: inherit; font-size: 0.86rem; font-weight: 600; cursor: pointer; }
+  .sammel-add[hidden] { display: none; }
+  .sammel-hint { font-size: 0.8rem; color: var(--ink-soft); margin: 0; }
+  @media (max-width: 640px) { .sammel-row { grid-template-columns: 1fr; } }
   .consent { display: flex; gap: 10px; align-items: flex-start; margin-top: 18px; font-size: 0.86rem; color: var(--ink-soft); cursor: pointer; }
   .consent input { margin-top: 3px; flex: none; }
   .consent a { color: var(--teal-deep); font-weight: 600; }
@@ -341,6 +354,13 @@
                 <option data-i18n="opt.5">Laborfahrt (Express)</option>
                 <option data-i18n="opt.6">Sonstige Sitzendfahrt</option>
               </select>
+            </div>
+            <div class="field full"><label for="f-org" data-i18n="field.org">Einrichtung / Besteller (optional)</label><input id="f-org" name="org" placeholder="z. B. Station 3B, Pflegeheim, Dialysezentrum" data-i18n-attr="placeholder" data-i18n="field.orgph"></div>
+            <label class="sammel-toggle"><input type="checkbox" id="f-sammel" name="sammel"><span><b data-i18n="sammel.toggle">Sammelfahrt: mehrere Patienten gemeinsam</b><small data-i18n="sammel.toggleSub">Gleiches Ziel und gleiche Uhrzeit, z. B. aus einem Pflegeheim oder zur selben Dialyse. Die oben eingetragene Person ist Patient 1.</small></span></label>
+            <div class="sammel" id="sammelBox" hidden>
+              <div id="sammelRows"></div>
+              <button type="button" class="sammel-add" id="sammelAdd" data-i18n="sammel.add">+ Weiteren Patienten hinzufügen</button>
+              <p class="sammel-hint" data-i18n="sammel.hint">Bis zu 3 Patienten pro Fahrzeug. Für größere Gruppen rufen Sie uns bitte an, wir planen dann mehrere Fahrten.</p>
             </div>
             <div class="field full"><label for="f-note" data-i18n="field.note">Anmerkungen</label><input id="f-note" name="note" placeholder="optional" data-i18n-attr="placeholder" data-i18n="field.noteph"></div>
           </div>
@@ -586,6 +606,12 @@ var I18N = {
   "field.time": {en: "Time *"},
   "field.kind": {en: "Type of ride *"},
   "field.note": {en: "Notes"},
+  "field.org": {en: "Facility / ordered by (optional)"},
+  "field.orgph": {en: "e.g. ward 3B, care home, dialysis centre"},
+  "sammel.toggle": {en: "Shared ride: several patients together"},
+  "sammel.toggleSub": {en: "Same destination and time, e.g. from a care home or to the same dialysis session. The person entered above is patient 1."},
+  "sammel.add": {en: "+ Add another patient"},
+  "sammel.hint": {en: "Up to 3 patients per vehicle. For larger groups please call us and we will plan several rides."},
   "field.noteph": {en: "optional"},
   "opt.placeholder": {en: "Please select"},
   "opt.1": {en: "Recurring ride (dialysis)"},
@@ -716,6 +742,43 @@ function showPage(id){
   // Web-App-URL des Google-Apps-Skripts (sendet Anfragen an service@medfer.de)
   var FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzn5hnfyLbMjs0o3yc0-XZUmoV80gp1kUsSvzD2vLIullNVxC5EWZLrQ74On8oDuaA/exec';
   var main = document.getElementById('bookingForm');
+  var SAM = {de:{p:'Patient', name:'Name', pick:'Abholadresse (leer = wie oben)', rm:'Entfernen', head:'SAMMELFAHRT', org:'Einrichtung', same:'wie Patient 1'},
+             en:{p:'Patient', name:'Name', pick:'Pick-up address (empty = same as above)', rm:'Remove', head:'SHARED RIDE', org:'Facility', same:'same as patient 1'}};
+  var sBox = document.getElementById('sammelBox'), sRows = document.getElementById('sammelRows'), sAdd = document.getElementById('sammelAdd'), sTog = document.getElementById('f-sammel');
+  function samT(){ return SAM[LANG] || SAM.de; }
+  function renumber(){
+    var t = samT();
+    Array.prototype.forEach.call(sRows.children, function(row, i){
+      row.querySelector('.lbl-name').textContent = t.p + ' ' + (i + 2) + ': ' + t.name + ' *';
+      row.querySelector('.lbl-pick').textContent = t.pick;
+      row.querySelector('.rm').textContent = t.rm;
+    });
+    sAdd.hidden = sRows.children.length >= 2;
+  }
+  function addRow(){
+    if (sRows.children.length >= 2) return;
+    var n = Date.now().toString(36) + sRows.children.length;
+    var row = document.createElement('div'); row.className = 'sammel-row';
+    row.innerHTML = '<div class="field"><label class="lbl-name" for="sp-n-' + n + '"></label><input id="sp-n-' + n + '" class="sp-name" required maxlength="80"></div>' +
+      '<div class="field"><label class="lbl-pick" for="sp-a-' + n + '"></label><input id="sp-a-' + n + '" class="sp-pick" maxlength="160"></div>' +
+      '<button type="button" class="rm"></button>';
+    row.querySelector('.rm').addEventListener('click', function(){ row.remove(); if (!sRows.children.length) { sTog.checked = false; sBox.hidden = true; } renumber(); });
+    sRows.appendChild(row); renumber(); row.querySelector('.sp-name').focus();
+  }
+  sTog.addEventListener('change', function(){ sBox.hidden = !sTog.checked; if (sTog.checked && !sRows.children.length) addRow(); if (!sTog.checked) sRows.innerHTML = ''; renumber(); });
+  sAdd.addEventListener('click', addRow);
+  document.getElementById('langToggle').addEventListener('click', function(){ setTimeout(renumber, 0); });
+  function sammelText(d){
+    var t = samT(), parts = [];
+    var rows = Array.prototype.map.call(sRows.querySelectorAll('.sammel-row'), function(r){ return {n: r.querySelector('.sp-name').value.trim(), a: r.querySelector('.sp-pick').value.trim()}; }).filter(function(x){ return x.n; });
+    if (sTog.checked && rows.length) {
+      parts.push(t.head + ' (' + (rows.length + 1) + ' ' + (LANG === 'en' ? 'patients' : 'Patienten') + ')');
+      rows.forEach(function(x, i){ parts.push(t.p + ' ' + (i + 2) + ': ' + x.n + ', ' + (x.a || t.same)); });
+    }
+    if (d.org) parts.push(t.org + ': ' + d.org);
+    if (d.note) parts.push(d.note);
+    return parts.join(' | ').slice(0, 990);
+  }
   var LABELS = {
     de: {name:'Name', phone:'Telefon', pickup:'Abholadresse', dropoff:'Zieladresse', date:'Datum', time:'Uhrzeit', kind:'Art der Fahrt', note:'Anmerkungen', subject:'Buchungsanfrage', waHeader:'Buchungsanfrage'},
     en: {name:'Name', phone:'Phone', pickup:'Pick-up address', dropoff:'Destination', date:'Date', time:'Time', kind:'Type of ride', note:'Notes', subject:'Booking request', waHeader:'Booking request'}
@@ -725,6 +788,7 @@ function showPage(id){
       e.preventDefault();
       if (!main.reportValidity()) return;
       var d = Object.fromEntries(new FormData(main).entries());
+      d.note = sammelText(d);
       var L = LABELS[LANG] || LABELS.de;
       var lines = [L.name+': ' + d.name, L.phone+': ' + d.phone, L.pickup+': ' + d.pickup, L.dropoff+': ' + d.dropoff, L.date+': ' + d.date, L.time+': ' + d.time, L.kind+': ' + d.kind, d.note ? L.note+': ' + d.note : null].filter(Boolean).join('\n');
       if (btn.dataset.mode === 'send') {
@@ -738,7 +802,7 @@ function showPage(id){
         btn.disabled = true; st.textContent = M.sending;
         var body = new URLSearchParams({name:d.name||'', phone:d.phone||'', pickup:d.pickup||'', dropoff:d.dropoff||'', date:d.date||'', time:d.time||'', kind:d.kind||'', note:d.note||'', lang:LANG, website:d.website||''});
         fetch(FORM_ENDPOINT, {method:'POST', mode:'no-cors', body:body})
-          .then(function(){ st.textContent = M.ok; main.reset(); })
+          .then(function(){ st.textContent = M.ok; main.reset(); sRows.innerHTML = ''; sBox.hidden = true; renumber(); })
           .catch(function(){ st.textContent = M.err; })
           .finally(function(){ btn.disabled = false; });
       } else {
