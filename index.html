@@ -132,7 +132,7 @@
   .sammel-toggle small { display: block; color: var(--ink-soft); font-size: 0.8rem; }
   .sammel { grid-column: 1 / -1; display: grid; gap: 12px; border: 1px dashed var(--line); border-radius: 12px; padding: 14px; }
   .sammel[hidden] { display: none; }
-  .sammel-row { display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; align-items: end; }
+  .sammel-row { display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 10px; align-items: end; }
   .sammel-row .rm { border: 0; background: none; color: var(--ink-soft); font: inherit; font-size: 0.82rem; cursor: pointer; text-decoration: underline; padding: 10px 0; }
   .sammel-add { justify-self: start; border: 1px solid var(--line); background: #fff; border-radius: 9px; padding: 8px 12px; font: inherit; font-size: 0.86rem; font-weight: 600; cursor: pointer; }
   .sammel-add[hidden] { display: none; }
@@ -356,7 +356,7 @@
               </select>
             </div>
             <div class="field full"><label for="f-org" data-i18n="field.org">Einrichtung / Besteller (optional)</label><input id="f-org" name="org" placeholder="z. B. Station 3B, Pflegeheim, Dialysezentrum" data-i18n-attr="placeholder" data-i18n="field.orgph"></div>
-            <label class="sammel-toggle"><input type="checkbox" id="f-sammel" name="sammel"><span><b data-i18n="sammel.toggle">Sammelfahrt: mehrere Patienten gemeinsam</b><small data-i18n="sammel.toggleSub">Gleiches Ziel und gleiche Uhrzeit, z. B. aus einem Pflegeheim oder zur selben Dialyse. Die oben eingetragene Person ist Patient 1.</small></span></label>
+            <label class="sammel-toggle"><input type="checkbox" id="f-sammel" name="sammel"><span><b data-i18n="sammel.toggle">Sammelfahrt: mehrere Patienten gemeinsam</b><small data-i18n="sammel.toggleSub">Mehrere Patienten fahren zur gleichen Zeit im selben Auto. Abholort oder Ziel können unterschiedlich sein, z. B. aus einem Pflegeheim zu verschiedenen Praxen. Die oben eingetragene Person ist Patient 1.</small></span></label>
             <div class="sammel" id="sammelBox" hidden>
               <div id="sammelRows"></div>
               <button type="button" class="sammel-add" id="sammelAdd" data-i18n="sammel.add">+ Weiteren Patienten hinzufügen</button>
@@ -609,7 +609,7 @@ var I18N = {
   "field.org": {en: "Facility / ordered by (optional)"},
   "field.orgph": {en: "e.g. ward 3B, care home, dialysis centre"},
   "sammel.toggle": {en: "Shared ride: several patients together"},
-  "sammel.toggleSub": {en: "Same destination and time, e.g. from a care home or to the same dialysis session. The person entered above is patient 1."},
+  "sammel.toggleSub": {en: "Several patients travel at the same time in one vehicle. Pick-up or destination may differ, e.g. from a care home to different practices. The person entered above is patient 1."},
   "sammel.add": {en: "+ Add another patient"},
   "sammel.hint": {en: "Up to 3 patients per vehicle. For larger groups please call us and we will plan several rides."},
   "field.noteph": {en: "optional"},
@@ -742,8 +742,8 @@ function showPage(id){
   // Web-App-URL des Google-Apps-Skripts (sendet Anfragen an service@medfer.de)
   var FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzn5hnfyLbMjs0o3yc0-XZUmoV80gp1kUsSvzD2vLIullNVxC5EWZLrQ74On8oDuaA/exec';
   var main = document.getElementById('bookingForm');
-  var SAM = {de:{p:'Patient', name:'Name', pick:'Abholadresse (leer = wie oben)', rm:'Entfernen', head:'SAMMELFAHRT', org:'Einrichtung', same:'wie Patient 1'},
-             en:{p:'Patient', name:'Name', pick:'Pick-up address (empty = same as above)', rm:'Remove', head:'SHARED RIDE', org:'Facility', same:'same as patient 1'}};
+  var SAM = {de:{p:'Patient', name:'Name', pick:'Abholadresse (leer = wie oben)', dest:'Ziel (leer = wie oben)', from:'ab', to:'nach', rm:'Entfernen', head:'SAMMELFAHRT', org:'Einrichtung', same:'wie Patient 1'},
+             en:{p:'Patient', name:'Name', pick:'Pick-up address (empty = same as above)', dest:'Destination (empty = same as above)', from:'from', to:'to', rm:'Remove', head:'SHARED RIDE', org:'Facility', same:'same as patient 1'}};
   var sBox = document.getElementById('sammelBox'), sRows = document.getElementById('sammelRows'), sAdd = document.getElementById('sammelAdd'), sTog = document.getElementById('f-sammel');
   function samT(){ return SAM[LANG] || SAM.de; }
   function renumber(){
@@ -751,6 +751,7 @@ function showPage(id){
     Array.prototype.forEach.call(sRows.children, function(row, i){
       row.querySelector('.lbl-name').textContent = t.p + ' ' + (i + 2) + ': ' + t.name + ' *';
       row.querySelector('.lbl-pick').textContent = t.pick;
+      row.querySelector('.lbl-dest').textContent = t.dest;
       row.querySelector('.rm').textContent = t.rm;
     });
     sAdd.hidden = sRows.children.length >= 2;
@@ -761,6 +762,7 @@ function showPage(id){
     var row = document.createElement('div'); row.className = 'sammel-row';
     row.innerHTML = '<div class="field"><label class="lbl-name" for="sp-n-' + n + '"></label><input id="sp-n-' + n + '" class="sp-name" required maxlength="80"></div>' +
       '<div class="field"><label class="lbl-pick" for="sp-a-' + n + '"></label><input id="sp-a-' + n + '" class="sp-pick" maxlength="160"></div>' +
+      '<div class="field"><label class="lbl-dest" for="sp-z-' + n + '"></label><input id="sp-z-' + n + '" class="sp-dest" maxlength="160"></div>' +
       '<button type="button" class="rm"></button>';
     row.querySelector('.rm').addEventListener('click', function(){ row.remove(); if (!sRows.children.length) { sTog.checked = false; sBox.hidden = true; } renumber(); });
     sRows.appendChild(row); renumber(); row.querySelector('.sp-name').focus();
@@ -770,10 +772,10 @@ function showPage(id){
   document.getElementById('langToggle').addEventListener('click', function(){ setTimeout(renumber, 0); });
   function sammelText(d){
     var t = samT(), parts = [];
-    var rows = Array.prototype.map.call(sRows.querySelectorAll('.sammel-row'), function(r){ return {n: r.querySelector('.sp-name').value.trim(), a: r.querySelector('.sp-pick').value.trim()}; }).filter(function(x){ return x.n; });
+    var rows = Array.prototype.map.call(sRows.querySelectorAll('.sammel-row'), function(r){ return {n: r.querySelector('.sp-name').value.trim(), a: r.querySelector('.sp-pick').value.trim(), z: r.querySelector('.sp-dest').value.trim()}; }).filter(function(x){ return x.n; });
     if (sTog.checked && rows.length) {
       parts.push(t.head + ' (' + (rows.length + 1) + ' ' + (LANG === 'en' ? 'patients' : 'Patienten') + ')');
-      rows.forEach(function(x, i){ parts.push(t.p + ' ' + (i + 2) + ': ' + x.n + ', ' + (x.a || t.same)); });
+      rows.forEach(function(x, i){ parts.push(t.p + ' ' + (i + 2) + ': ' + x.n + ', ' + t.from + ' ' + (x.a || t.same) + ', ' + t.to + ' ' + (x.z || t.same)); });
     }
     if (d.org) parts.push(t.org + ': ' + d.org);
     if (d.note) parts.push(d.note);
