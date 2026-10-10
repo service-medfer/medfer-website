@@ -336,6 +336,7 @@
           <div class="grid2">
             <div class="field"><label for="f-name" data-i18n="field.name">Name *</label><input id="f-name" name="name" required></div>
             <div class="field"><label for="f-phone" data-i18n="field.phone">Telefon *</label><input id="f-phone" name="phone" type="tel" required></div>
+            <div class="field full"><label for="f-email" data-i18n="field.email">E-Mail für Ihre Bestätigung (optional)</label><input id="f-email" name="email" type="email" maxlength="120" autocomplete="email"></div>
             <div class="field"><label for="f-pickup" data-i18n="field.pickup">Abholadresse *</label><input id="f-pickup" name="pickup" required></div>
             <div class="field"><label for="f-dropoff" data-i18n="field.dropoff">Zieladresse *</label><input id="f-dropoff" name="dropoff" required></div>
             <div class="field"><label for="f-date" data-i18n="field.date">Datum *</label><input id="f-date" name="date" type="date" required></div>
@@ -537,7 +538,7 @@
       <div class="legal">
         <p data-i18n-html="privacy.p1"><strong>1. Verantwortlicher</strong><br>Muhammad Tayub Khan, Breitenbachstraße 1, 60487 Frankfurt am Main, Telefon 017648989575, E-Mail service@medfer.de.</p>
         <p data-i18n-html="privacy.p2"><strong>2. Hosting der Website</strong><br>Diese Website wird bei GitHub Pages (GitHub, Inc., USA) gehostet. Beim Aufruf verarbeitet GitHub technisch notwendige Daten wie Ihre IP-Adresse, um die Seite auszuliefern. Die Seite lädt keine Schriftarten oder Skripte von weiteren Drittanbietern.</p>
-        <p data-i18n-html="privacy.p3"><strong>3. Buchungsformular</strong><br>Wenn Sie „Anfrage senden“ nutzen, werden Ihre Angaben (Name, Telefon, Adressen, Datum, Uhrzeit, Art der Fahrt, ggf. Anmerkungen) verschlüsselt an unser E-Mail-Postfach service@medfer.de übermittelt. Dafür nutzen wir Google Workspace (Google Ireland Limited) als Auftragsverarbeiter. Auf der Website selbst werden keine Formulardaten gespeichert.</p>
+        <p data-i18n-html="privacy.p3"><strong>3. Buchungsformular</strong><br>Wenn Sie „Anfrage senden“ nutzen, werden Ihre Angaben (Name, Telefon, ggf. E-Mail, Adressen, Datum, Uhrzeit, Art der Fahrt, ggf. Anmerkungen) verschlüsselt an unser E-Mail-Postfach service@medfer.de übermittelt. Dafür nutzen wir Google Workspace (Google Ireland Limited) als Auftragsverarbeiter. Wenn Sie eine E-Mail-Adresse angeben, senden wir Ihnen die Bestätigung Ihrer Fahrt an diese Adresse. Auf der Website selbst werden keine Formulardaten gespeichert.</p>
         <p data-i18n-html="privacy.p4"><strong>4. Besondere Kategorien personenbezogener Daten</strong><br>Die Angabe der Behandlungsart (z. B. Dialyse, Chemotherapie) stellt eine Gesundheitsangabe im Sinne von Art. 9 DSGVO dar. Die Verarbeitung erfolgt auf Grundlage Ihrer ausdrücklichen Einwilligung (Art. 9 Abs. 2 lit. a DSGVO), die Sie beim Absenden des Formulars erteilen.</p>
         <p data-i18n-html="privacy.p5"><strong>5. Versand per WhatsApp</strong><br>Nutzen Sie den WhatsApp-Button, wird die Nachricht über den Dienst WhatsApp (Meta Platforms Ireland Limited) übermittelt; hierbei gelten die Datenschutzbestimmungen von WhatsApp/Meta, ggf. mit Datenübermittlung in Drittländer.</p>
         <p data-i18n-html="privacy.p6"><strong>6. Speicherdauer</strong><br>Ihre Angaben aus dem Buchungsformular werden nur so lange aufbewahrt, wie es zur Bearbeitung Ihrer Fahrt erforderlich ist. Für abrechnungsrelevante Unterlagen gelten die gesetzlichen Aufbewahrungsfristen (i. d. R. bis zu 10 Jahre); danach werden die Daten gelöscht.</p>
@@ -606,6 +607,7 @@ var I18N = {
   "field.time": {en: "Time *"},
   "field.kind": {en: "Type of ride *"},
   "field.note": {en: "Notes"},
+  "field.email": {en: "Email for your confirmation (optional)"},
   "field.org": {en: "Facility / ordered by (optional)"},
   "field.orgph": {en: "e.g. ward 3B, care home, dialysis centre"},
   "sammel.toggle": {en: "Shared ride: several patients together"},
@@ -691,7 +693,7 @@ var I18N = {
   "privacy.h2": {en: "How we handle your data"},
   "privacy.p1": {en: "<strong>1. Controller</strong><br>Muhammad Tayub Khan, Breitenbachstraße 1, 60487 Frankfurt am Main, Germany, phone 017648989575, email service@medfer.de."},
   "privacy.p2": {en: "<strong>2. Hosting of this website</strong><br>This website is hosted on GitHub Pages (GitHub, Inc., USA). When you visit, GitHub processes technically necessary data such as your IP address to deliver the page. The page loads no fonts or scripts from other third parties."},
-  "privacy.p3": {en: "<strong>3. Booking form</strong><br>When you use \"Send request\", your details (name, phone, addresses, date, time, type of ride, any notes) are transmitted encrypted to our mailbox service@medfer.de. We use Google Workspace (Google Ireland Limited) as processor for this. No form data is stored on the website itself."},
+  "privacy.p3": {en: "<strong>3. Booking form</strong><br>When you use \"Send request\", your details (name, phone, email if given, addresses, date, time, type of ride, any notes) are transmitted encrypted to our mailbox service@medfer.de. We use Google Workspace (Google Ireland Limited) as processor for this. If you provide an email address, we send your ride confirmation to it. No form data is stored on the website itself."},
   "privacy.p4": {en: "<strong>4. Special categories of personal data</strong><br>Stating the type of treatment (e.g. dialysis, chemotherapy) constitutes health data within the meaning of Art. 9 GDPR. Processing is based on your explicit consent (Art. 9(2)(a) GDPR), given when you submit the form."},
   "privacy.p5": {en: "<strong>5. Sending via WhatsApp</strong><br>Using the WhatsApp button sends the message via WhatsApp (Meta Platforms Ireland Limited); WhatsApp/Meta's own privacy terms apply, possibly including data transfer to third countries."},
   "privacy.p6": {en: "<strong>6. Retention period</strong><br>Your booking form details are kept only as long as necessary to process your ride. Statutory retention periods apply to billing-related records (generally up to 10 years); afterwards the data is deleted."},
@@ -777,6 +779,7 @@ function showPage(id){
       parts.push(t.head + ' (' + (rows.length + 1) + ' ' + (LANG === 'en' ? 'patients' : 'Patienten') + ')');
       rows.forEach(function(x, i){ parts.push(t.p + ' ' + (i + 2) + ': ' + x.n + ', ' + t.from + ' ' + (x.a || t.same) + ', ' + t.to + ' ' + (x.z || t.same)); });
     }
+    if (d.email) parts.push((LANG === 'en' ? 'Bestätigung an' : 'Bestätigung an') + ': ' + d.email);
     if (d.org) parts.push(t.org + ': ' + d.org);
     if (d.note) parts.push(d.note);
     return parts.join(' | ').slice(0, 990);
