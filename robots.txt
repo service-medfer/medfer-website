@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://medfer.de/sitemap.xml
